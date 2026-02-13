@@ -11,5 +11,9 @@ export default function NonMobileLayout({
     orientation: "backwards" | "forwards",
     changeOrientation: (orientation: "backwards" | "forwards") => void
 }) {
-    return null;
+    return <>
+        <Tabs orientation={orientation} />
+        <PrimarySideBar  />
+        <Buttons />
+    </>;
 }

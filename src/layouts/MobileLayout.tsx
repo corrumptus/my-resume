@@ -7,5 +7,10 @@ export default function MobileLayout({
     theme: string,
     changeTheme: (theme: string) => void
 }) {
-    return null;
+    return <>
+        <TabHeader />
+        <TabView />
+        <TabVisualizer />
+        <SideBar />
+    </>;
 }

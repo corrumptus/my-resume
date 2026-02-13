@@ -6,7 +6,7 @@ const MAX_MOBILE_WIDTH = 800;
 
 const width = window.innerWidth;
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.body).render(
   width <= MAX_MOBILE_WIDTH ?
     <MobileLayout />
     :

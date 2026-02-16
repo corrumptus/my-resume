@@ -94,6 +94,13 @@ function Layout() {
       prevFiles[curSelectedFileIndex].isSelected = false;
       prevFiles[fileWithNameIndex].isSelected = true;
 
+      const fileInStackIndex = fileSelectionStack.current.indexOf(fileName);
+
+      if (fileInStackIndex !== -1)
+        fileSelectionStack.current.splice(fileInStackIndex, 1);
+
+      fileSelectionStack.current.push(fileName);
+
       return [ ...prevFiles ];
     });
   }
@@ -104,6 +111,7 @@ function Layout() {
       theme={theme}
       changeTheme={setTheme}
       files={files}
+      selectedFile={files.find(f => f.name === fileSelectionStack.current.at(-1) as string) as File}
       selectFile={selectFile}
       closeFile={closeFile}
     />
@@ -115,6 +123,7 @@ function Layout() {
       orientation={nonMobileOrientation}
       changeOrientation={setNonMobileOrientation}
       files={files}
+      selectedFile={files.find(f => f.name === fileSelectionStack.current.at(-1) as string) as File}
       selectFile={selectFile}
       closeFile={closeFile}
     />;

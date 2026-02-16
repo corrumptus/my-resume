@@ -8,6 +8,7 @@ export default function NonMobileLayout({
     orientation,
     changeOrientation,
     files,
+    selectedFile,
     selectFile,
     closeFile
 }: {
@@ -17,12 +18,11 @@ export default function NonMobileLayout({
     orientation: "backwards" | "forwards",
     changeOrientation: (orientation: "backwards" | "forwards") => void,
     files: File[],
+    selectedFile: File,
     selectFile: (fileName: string) => void,
     closeFile: (fileName: string) => void,
 }) {
     const openedFiles = files.filter(f => f.isOpen);
-
-    const selectedFile = files.find(f => f.isSelected) as File;
 
     return orientation === "backwards" ?
         <>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import MobileLayout from "./layouts/MobileLayout";
 import NonMobileLayout from "./layouts/NonMobileLayout";
@@ -30,6 +30,7 @@ function Layout() {
       isSelected: true
     }
   ]);
+  const fileSelectionStack = useRef([ "currículo.html" ]);
 
   useEffect(() => {
     const ro = new ResizeObserver(() => setWidth(window.innerWidth));

@@ -105,6 +105,22 @@ function Layout() {
     });
   }
 
+  function closeFile(fileName: string) {
+    setFiles(prevFiles => {
+      const fileIndex = prevFiles.findIndex(f => f.name === fileName);
+
+      if (prevFiles[fileIndex].canClose)
+        prevFiles[fileIndex].isOpen = false;
+
+      const fileInStackIndex = fileSelectionStack.current.indexOf(fileName);
+
+      if (fileInStackIndex !== -1)
+        fileSelectionStack.current.splice(fileInStackIndex, 1);
+
+      return [ ...prevFiles ];
+    });
+  }
+
   return width <= MAX_MOBILE_WIDTH ?
     <MobileLayout
       changeLang={setLang}

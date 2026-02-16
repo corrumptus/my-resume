@@ -61,13 +61,50 @@ function Layout() {
     }
   }, [lang]);
 
+  function selectFile(fileName: string) {
+    setFiles(prevFiles => {
+      let curSelectedFileIndex = null;
+      let fileWithNameIndex = null;
+
+      let i = 0;
+
+      while (
+        curSelectedFileIndex !== null
+        &&
+        fileWithNameIndex !== null
+        ||
+        i < prevFiles.length
+      ) {
+        if (prevFiles[i].isSelected)
+          curSelectedFileIndex = i;
+
+        if (prevFiles[i].name === fileName)
+          fileWithNameIndex = i;
+
+        i++;
+      }
+
+      if (curSelectedFileIndex === null || fileWithNameIndex === null) {
+        alert(lang === "pt-br" ? "Algo deu errado. A página será recarregada. :(" : "Something went wrong. The page will be reloaded. :(");
+        window.location.reload();
+        return [ ...prevFiles ];
+      }
+
+      prevFiles[curSelectedFileIndex].isSelected = false;
+      prevFiles[fileWithNameIndex].isSelected = true;
+
+      return [ ...prevFiles ];
+    });
+  }
+
   return width <= MAX_MOBILE_WIDTH ?
     <MobileLayout
       changeLang={setLang}
       theme={theme}
       changeTheme={setTheme}
       files={files}
-      setFiles={setFiles}
+      selectFile={selectFile}
+      closeFile={closeFile}
     />
     :
     <NonMobileLayout
@@ -77,7 +114,8 @@ function Layout() {
       orientation={nonMobileOrientation}
       changeOrientation={setNonMobileOrientation}
       files={files}
-      setFiles={setFiles}
+      selectFile={selectFile}
+      closeFile={closeFile}
     />;
 }
 

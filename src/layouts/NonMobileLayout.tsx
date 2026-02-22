@@ -1,6 +1,8 @@
+import Buttons from "../components/nonMobile/Buttons";
+import PrimarySideBar from "../components/nonMobile/PrimarySideBar";
 import Tabs from "../components/nonMobile/Tabs";
 import type { File } from "../main";
-import themes from "../utils/themes";
+import type themes from "../utils/themes";
 
 export default function NonMobileLayout({
     changeLang,
@@ -27,32 +29,27 @@ export default function NonMobileLayout({
 }) {
     const openedFiles = files.filter(f => f.isOpen);
 
+    const orderedChildren = [
+        <Tabs
+            orientation={orientation}
+            openedFiles={openedFiles}
+            selectedFile={selectedFile}
+            changeFileContent={changeFileContent}
+            selectFile={selectFile}
+            closeFile={closeFile}
+            theme={theme}
+        />,
+        <PrimarySideBar
+            files={files}
+            selectedFile={selectedFile}
+            selectFile={selectFile}
+            theme={theme}
+        />,
+        <Buttons />
+    ];
+
     return orientation === "backwards" ?
-        <>
-            <Tabs
-                orientation={orientation}
-                openedFiles={openedFiles}
-                selectedFile={selectedFile}
-                changeFileContent={changeFileContent}
-                selectFile={selectFile}
-                closeFile={closeFile}
-                theme={theme}
-            />
-            <PrimarySideBar />
-            <Buttons />
-        </>
+        orderedChildren
         :
-        <>
-            <Buttons />
-            <PrimarySideBar />
-            <Tabs
-                orientation={orientation}
-                openedFiles={openedFiles}
-                selectedFile={selectedFile}
-                changeFileContent={changeFileContent}
-                selectFile={selectFile}
-                closeFile={closeFile}
-                theme={theme}
-            />
-        </>;
+        [ ...orderedChildren ].reverse();
 }

@@ -13,7 +13,7 @@ export default function PrimarySideBar({
     theme: keyof typeof themes
 }) {
     return <aside>
-        <div className="folder">Lucas Lazarini</div>
+        <header>Lucas Lazarini</header>
         <ul>
             {files.map(f =>
                 <li

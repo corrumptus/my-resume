@@ -5,6 +5,7 @@ import type { File } from "../main";
 import type themes from "../utils/themes";
 
 export default function NonMobileLayout({
+    lang,
     changeLang,
     theme,
     changeTheme,
@@ -16,6 +17,7 @@ export default function NonMobileLayout({
     selectFile,
     closeFile
 }: {
+    lang: "pt-br" | "en",
     changeLang: (lang: "pt-br" | "en") => void,
     theme: keyof typeof themes,
     changeTheme: (theme: keyof typeof themes) => void,
@@ -45,7 +47,7 @@ export default function NonMobileLayout({
             selectFile={selectFile}
             theme={theme}
         />,
-        <Buttons />
+        <Buttons lang={lang} />
     ];
 
     return orientation === "backwards" ?

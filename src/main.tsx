@@ -161,6 +161,7 @@ function Layout() {
 		/>
 		:
 		<NonMobileLayout
+			lang={lang}
 			changeLang={setLang}
 			theme={theme}
 			changeTheme={setTheme}

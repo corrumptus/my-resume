@@ -33,6 +33,7 @@ export default function NonMobileLayout({
 
     const orderedChildren = [
         <Tabs
+            key={0}
             orientation={orientation}
             openedFiles={openedFiles}
             selectedFile={selectedFile}
@@ -42,12 +43,13 @@ export default function NonMobileLayout({
             theme={theme}
         />,
         <PrimarySideBar
+            key={1}
             files={files}
             selectedFile={selectedFile}
             selectFile={selectFile}
             theme={theme}
         />,
-        <Buttons lang={lang} />
+        <Buttons key={2} lang={lang} />
     ];
 
     return orientation === "backwards" ?

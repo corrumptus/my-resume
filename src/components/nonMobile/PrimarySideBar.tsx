@@ -1,16 +1,13 @@
-import type { File } from "../../main"
-import themes from "../../utils/themes"
+import type { File } from "../../main";
 
 export default function PrimarySideBar({
     files,
     selectedFile,
-    selectFile,
-    theme
+    selectFile
 }: {
     files: File[],
     selectedFile: File,
-    selectFile: (fileName: string) => void,
-    theme: keyof typeof themes
+    selectFile: (fileName: string) => void
 }) {
     return <aside>
         <header>Lucas Lazarini</header>
@@ -19,12 +16,7 @@ export default function PrimarySideBar({
                 <li
                     key={f.name}
                     onClick={() => selectFile(f.name)}
-                    style={{
-                        backgroundColor: selectedFile.name === f.name ?
-                            themes[theme].folderSelectedFileBgColor
-                            :
-                            ""
-                    }}
+                    className={selectedFile.name === f.name ? "selected" : ""}
                 >
                     {f.name}
                 </li>

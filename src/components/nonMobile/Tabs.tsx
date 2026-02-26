@@ -1,6 +1,6 @@
-import type { File } from "../../main";
 import CodeTab from "./CodeTab";
-import type themes from "../../utils/themes";
+import themes from "../../utils/themes";
+import type { File } from "../../main";
 
 export default function Tabs({
     orientation,
@@ -19,26 +19,48 @@ export default function Tabs({
     closeFile: (fileName: string) => void,
     theme: keyof typeof themes
 }) {
-    return <main> {/*style={{ flexDirection: orientation === "backwards" ? "row" : "revert" }}*/}
+    return <main style={{ flexDirection: orientation === "backwards" ? "row" : "row-reverse" }}>
         <div id="browser">
             <header>
-                <button key={selectedFile.name}>
-                    <span>{selectedFile.name}</span>
+                <button>
+                    <span>{`http://localhost/${selectedFile.name}`}</span>
                 </button>
             </header>
-            <div className="tabBody">
-                <iframe srcDoc={selectedFile.content} />
-            </div>
+            <iframe srcDoc={selectedFile.content} />
         </div>
         <div id="files">
             <header>
                 {openedFiles.map(f =>
-                    <button key={f.name} onClick={() => selectFile(f.name)}>
-                        {f === selectedFile && <div className="selectedBorder"></div>}
+                    <button
+                        key={f.name}
+                        onClick={() => selectFile(f.name)}
+                        style={{
+                            backgroundColor: f.name === selectedFile.name ?
+                                themes[theme].focusedTabFileBgColor
+                                :
+                                themes[theme].standbyTabFileBgColor,
+                            color: f.name === selectedFile.name ?
+                                themes[theme].focusedTabFileNameColor
+                                :
+                                themes[theme].standbyTabFileNameColor
+                        }}
+                    >
                         <span>{f.name}</span>
-                        <span onClick={() => closeFile(f.name)}>
-                            <div className="stick primary"></div>
-                            <div className="stick secondary"></div>
+                        <span id="close" onClick={() => closeFile(f.name)}>
+                            <div
+                                className="stick primary"
+                                style={{
+                                    visibility: f.name === selectedFile.name ? "visible" : "hidden"
+                                }}
+                            >
+                            </div>
+                            <div
+                                className="stick secondary"
+                                style={{
+                                    visibility: f.name === selectedFile.name ? "visible" : "hidden"
+                                }}
+                            >
+                            </div>
                         </span>
                     </button>
                 )}

@@ -24,7 +24,7 @@ export type Theme = {
 	selectedThing: string,
 	componentSeparatorBorderColor: string,
 	caretColor: string,
-	iconColor: 0 | 1,
+	iconColor: "0" | "1",
 	tagName: string,
 	tagBracket: string,
 	attrName: string,

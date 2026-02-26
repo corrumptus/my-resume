@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import NonMobileLayout from "./layouts/NonMobileLayout";
 import MobileLayout from "./layouts/MobileLayout";
 import { MAX_MOBILE_WIDTH, type File } from "./main";
-import type themes from "./utils/themes";
+import themes from "./utils/themes";
 import resume from "./assets/resume.html?raw";
 
 export default function App() {
@@ -38,6 +38,12 @@ export default function App() {
         else
             document.querySelector("title")!.innerText = "Resume";
     }, [lang]);
+
+	useEffect(() => {
+		Object.entries(themes[theme]).forEach(([themeProp, value]) => {
+			document.documentElement.style.setProperty(`--${themeProp}`, value);
+		});
+	}, [theme]);
 
     function changeLang(newLang: "pt-br" | "en") {
         if (newLang === lang)

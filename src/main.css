@@ -1,0 +1,170 @@
+body {
+    height: 100vh;
+    margin: unset;
+    display: flex;
+}
+
+nav, aside {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primaryBgColor);
+}
+
+nav button {
+    padding: .75em .5em;
+    border: none;
+    border-inline: 2px solid transparent;
+    background-color: unset;
+    cursor: pointer;
+}
+
+nav button:last-child {
+    margin-top: auto;
+}
+
+nav button img {
+    width: 30px;
+    display: block;
+    filter: invert(1);
+}
+
+aside {
+    width: min(100%, 250px);
+    border-inline: 1px solid var(--componentSeparatorBorderColor);
+    gap: .3em;
+    font-family: sans-serif;
+    color: var(--folderFileNameColor);
+}
+
+aside header {
+    padding: .5em .5em 0px .5em;
+    font-weight: bold;
+}
+
+aside ul {
+    padding: unset;
+    margin: unset;
+    list-style: none;
+}
+
+aside ul li {
+    padding: .1em .5em .1em 1.5em;
+    cursor: pointer;
+}
+
+aside ul li.selected {
+    background-color: var(--folderSelectedFileBgColor);
+}
+
+main {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+main #browser {
+    width: 50%;
+    flex-shrink: 0;
+}
+
+main #browser iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+main #files {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    background-color: var(--secondaryBgColor);
+}
+
+main :is(#browser, #files) header {
+    border-bottom: 1px solid var(--componentSeparatorBorderColor);
+    display: flex;
+    background-color: var(--primaryBgColor);
+    overflow: auto;
+}
+
+main :is(#browser, #files) header button {
+    padding: .5em .6em .5em 1em;
+    border-width: 1px 1px 0px 0px;
+    border-style: solid;
+    border-color: transparent var(--componentSeparatorBorderColor);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    cursor: pointer;
+}
+
+main #browser header button {
+    padding: calc(0.7em - .5px);
+}
+
+main #files header button #close {
+    width: 1em;
+    height: calc(1em + 2px);
+    padding: .2em;
+    display: grid;
+    place-items: center;
+}
+
+main #files header button #close:hover {
+    background-color: var(--closeTabButtonBgColor);
+    border-radius: .3em;
+}
+
+main #files header button #close .stick {
+    width: 1px;
+    height: 1em;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+main #files header button #close:hover .stick {
+    visibility: visible;
+}
+
+main #files header button #close .primary {
+    transform: rotate(45deg);
+}
+
+main #files header button #close .secondary {
+    transform: rotate(-45deg);
+}
+
+main #files .tabBody {
+    height: 100%;
+    overflow: auto;
+}
+
+main #files .tabBody .code {
+    position: relative;
+    width: fit-content;
+    font-family: sans-serif;
+}
+
+pre, textarea {
+    padding: 1em 8em 0px 1em;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+pre {
+    pointer-events: none;
+}
+
+textarea {
+    inset: 0;
+    border: unset;
+    background: transparent;
+    color: transparent;
+    caret-color: var(--caretColor);
+    outline: none;
+    position: absolute;
+    resize: none;
+}

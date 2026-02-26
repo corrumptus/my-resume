@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
+import "./main.css";
 
 export type File = {
 	name: string,
@@ -15,9 +16,15 @@ export type Theme = {
 	secondaryBgColor: string,
 	folderFileNameColor: string,
 	folderSelectedFileBgColor: string,
-	selectedFileNameColor: string,
-	standbyFileNameColor: string,
-	selectedFileColor: string,
+	focusedTabFileBgColor: string,
+	standbyTabFileBgColor: string,
+	focusedTabFileNameColor: string,
+	standbyTabFileNameColor: string,
+	closeTabButtonBgColor: string, 
+	selectedThing: string,
+	componentSeparatorBorderColor: string,
+	caretColor: string,
+	iconColor: 0 | 1,
 	tagName: string,
 	tagBracket: string,
 	attrName: string,

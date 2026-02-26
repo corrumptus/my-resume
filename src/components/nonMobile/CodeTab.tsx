@@ -21,7 +21,7 @@ export default function CodeTab({
         preRef.current!.scrollLeft = taRef.current.scrollLeft;
     }
 
-    return <div className="code" style={{ backgroundColor: themes[theme].secondaryBgColor }}>
+    return <div className="code">
         <pre
             ref={preRef}
             aria-hidden="true"

@@ -101,7 +101,7 @@ main :is(#browser, #files) header button {
 }
 
 main #browser header button {
-    padding: calc(0.7em - .5px);
+    padding: calc(0.7em - 1.5px);
 }
 
 main #files header button #close {

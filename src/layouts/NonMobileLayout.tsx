@@ -6,28 +6,30 @@ import type themes from "../utils/themes";
 
 export default function NonMobileLayout({
     lang,
-    changeLang,
     theme,
-    changeTheme,
     orientation,
-    changeOrientation,
     files,
     selectedFile,
     changeFileContent,
     selectFile,
-    closeFile
+    closeFile,
+    selectedSideBar,
+    changeSelectedSideBar,
+    download,
+    openSettings
 }: {
     lang: "pt-br" | "en",
-    changeLang: (lang: "pt-br" | "en") => void,
     theme: keyof typeof themes,
-    changeTheme: (theme: keyof typeof themes) => void,
     orientation: "backwards" | "forwards",
-    changeOrientation: (orientation: "backwards" | "forwards") => void,
     files: File[],
     selectedFile: File,
     changeFileContent: (content: string) => void,
     selectFile: (fileName: string) => void,
     closeFile: (fileName: string) => void,
+    selectedSideBar: "files" | "chat" | undefined,
+    changeSelectedSideBar: (sideBar: "files" | "chat") => void,
+    download: () => void,
+    openSettings: () => void
 }) {
     const openedFiles = files.filter(f => f.isOpen);
 
@@ -47,9 +49,17 @@ export default function NonMobileLayout({
             files={files}
             selectedFile={selectedFile}
             selectFile={selectFile}
-            theme={theme}
         />,
-        <Buttons key={2} lang={lang} />
+        <Buttons
+            key={2}
+            selectedSideBar={selectedSideBar}
+            changeSelectedSideBar={changeSelectedSideBar}
+            download={download}
+            openSettings={openSettings}
+            orientation={orientation}
+            lang={lang}
+            theme={theme}
+        />
     ];
 
     return orientation === "backwards" ?

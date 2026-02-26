@@ -1,19 +1,51 @@
+import themes from "../../utils/themes";
+
 export default function Buttons({
-    lang
+    selectedSideBar,
+    changeSelectedSideBar,
+    download,
+    openSettings,
+    orientation,
+    lang,
+    theme
 }: {
-    lang: "pt-br" | "en"
+    selectedSideBar: "files" | "chat" | undefined,
+    changeSelectedSideBar: (sideBar: "files" | "chat") => void,
+    download: () => void,
+    openSettings: (x: number, y: number) => void,
+    orientation: "backwards" | "forwards",
+    lang: "pt-br" | "en",
+    theme: keyof typeof themes
 }) {
     return <nav>
-        <button title={lang === "pt-br" ? "Arquivos" : "Files"}>
+        <button
+            onClick={() => changeSelectedSideBar("files")}
+            title={lang === "pt-br" ? "Arquivos" : "Files"}
+            style={selectedSideBar === "files" ? {
+                [orientation === "backwards" ? "borderRightColor" : "borderLeftColor"]: themes[theme].selectedFileColor
+            } : undefined}
+        >
             <img src="https://raw.githubusercontent.com/microsoft/vscode-codicons/542ec2a3375b21d42d4b75a995c4feb896aad305/src/icons/files.svg" alt="a file(paper with the top right corner folded) on the top of other file" />
         </button>
-        <button title={lang === "pt-br" ? "Converse comigo" : "Chat with me"}>
+        <button
+            onClick={() => changeSelectedSideBar("chat")}
+            title={lang === "pt-br" ? "Converse comigo" : "Chat with me"}
+            style={selectedSideBar === "chat" ? {
+                [orientation === "backwards" ? "borderRightColor" : "borderLeftColor"]: themes[theme].selectedFileColor
+            } : undefined}
+        >
             <img src="https://raw.githubusercontent.com/microsoft/vscode-codicons/542ec2a3375b21d42d4b75a995c4feb896aad305/src/icons/copilot.svg" alt="the copilot logo" />
         </button>
-        <button title={lang === "pt-br" ? "Baixar currículo" : "Download resume" }>
+        <button
+            onClick={download}
+            title={lang === "pt-br" ? "Baixar currículo" : "Download resume"}
+        >
             <img src="https://raw.githubusercontent.com/microsoft/vscode-codicons/542ec2a3375b21d42d4b75a995c4feb896aad305/src/icons/download.svg" alt="a arrow pointing to the bottom" />
         </button>
-        <button title={lang === "pt-br" ? "Configurações" : "Settings"}>
+        <button
+            onClick={e => openSettings(e.clientX, e.clientY)}
+            title={lang === "pt-br" ? "Configurações" : "Settings"}
+        >
             <img src="https://raw.githubusercontent.com/microsoft/vscode-codicons/542ec2a3375b21d42d4b75a995c4feb896aad305/src/icons/settings-gear.svg" alt="a gear" />
         </button>
     </nav>;

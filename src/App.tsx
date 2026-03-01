@@ -75,6 +75,12 @@ export default function App() {
             prevFiles[0].name = newLang === "pt-br" ? "currículo.html" : "resume.html";
             return [ ...prevFiles ];
         });
+
+		setFileSelectionStack(prevFileSelectionStack => {
+			const index = prevFileSelectionStack.indexOf(lang === "pt-br" ? "currículo.html" : "resume.html");
+			prevFileSelectionStack[index] = newLang === "pt-br" ? "currículo.html" : "resume.html";
+			return [ ...prevFileSelectionStack ];
+		});
     }
 
 	function changeFileContent(content: string) {
@@ -155,6 +161,24 @@ export default function App() {
 
 			return [ ...prevFiles ];
 		});
+	}
+
+	function download() {
+		const blob = new Blob([resume], { type: "text/html;charset=utf-8" });
+    	const url = URL.createObjectURL(blob);
+
+		const link = document.createElement("a");
+		link.style.visibility = "hidden";
+		link.href = url;
+		link.download = lang === "pt-br" ?
+			"currículo - Lucas Lazarini.pdf"
+			:
+			"resume - Lucas Lazarini.pdf";
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+
+		URL.revokeObjectURL(url);
 	}
 
 	return width <= MAX_MOBILE_WIDTH ?

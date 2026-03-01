@@ -2,6 +2,10 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./main.css";
 
+export type AvailableLangs = "pt-br" | "en";
+
+export type AvailableOrientations = "backwards" | "forwards";
+
 export type File = {
 	name: string,
 	content: string,
@@ -33,6 +37,8 @@ export type Theme = {
 	text: string,
 	comment: string
 };
+
+export type AvailableThemes = "default" | "light" | "dark" | "monokai" | "dracula";
 
 export const MAX_MOBILE_WIDTH = 800;
 

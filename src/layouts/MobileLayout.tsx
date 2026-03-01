@@ -1,9 +1,11 @@
+import type { AvailableLangs } from "../main";
+
 export default function MobileLayout({
     changeLang,
     theme,
     changeTheme
 }: {
-    changeLang: (lang: "pt-br" | "en") => void,
+    changeLang: (lang: AvailableLangs) => void,
     theme: string,
     changeTheme: (theme: string) => void
 }) {

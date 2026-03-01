@@ -1,6 +1,6 @@
-import type { Theme } from "../main";
+import type { AvailableThemes, Theme } from "../main";
 
-const themes: Record<"default" | "light" | "dark" | "monokai" | "dracula", Theme> = {
+const themes: Record<AvailableThemes, Theme> = {
     "default": {
         primaryBgColor: "#181818",
         secondaryBgColor: "#1f1f1f",

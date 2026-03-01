@@ -1,6 +1,7 @@
 import { useRef, type RefObject } from "react";
 import htmlHighlighter from "../../utils/html-highlighter";
 import themes from "../../utils/themes";
+import type { AvailableThemes } from "../../main";
 
 export default function CodeTab({
     code,
@@ -9,7 +10,7 @@ export default function CodeTab({
 }: {
     code: string,
     setCode: (code: string) => void,
-    theme: keyof typeof themes
+    theme: AvailableThemes
 }) {
     const preRef = useRef<HTMLPreElement>(null) as RefObject<HTMLPreElement>;
     const taRef = useRef<HTMLTextAreaElement>(null) as RefObject<HTMLTextAreaElement>;

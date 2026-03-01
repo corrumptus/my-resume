@@ -1,6 +1,6 @@
 import CodeTab from "./CodeTab";
 import themes from "../../utils/themes";
-import type { File } from "../../main";
+import type { AvailableOrientations, AvailableThemes, File } from "../../main";
 
 export default function Tabs({
     orientation,
@@ -11,13 +11,13 @@ export default function Tabs({
     closeFile,
     theme
 }: {
-    orientation: "backwards" | "forwards",
+    orientation: AvailableOrientations,
     openedFiles: File[],
     selectedFile: File,
     changeFileContent: (content: string) => void,
     selectFile: (fileName: string) => void,
     closeFile: (fileName: string) => void,
-    theme: keyof typeof themes
+    theme: AvailableThemes
 }) {
     return <main style={{ flexDirection: orientation === "backwards" ? "row" : "row-reverse" }}>
         <div id="browser">

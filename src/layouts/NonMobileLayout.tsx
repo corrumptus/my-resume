@@ -1,13 +1,16 @@
 import Buttons from "../components/nonMobile/Buttons";
 import PrimarySideBar from "../components/nonMobile/PrimarySideBar";
+import SettingsModal from "../components/nonMobile/SettingsModal";
 import Tabs from "../components/nonMobile/Tabs";
-import type { File } from "../main";
-import type themes from "../utils/themes";
+import type { AvailableLangs, AvailableOrientations, AvailableThemes, File } from "../main";
 
 export default function NonMobileLayout({
     lang,
+    changeLang,
     theme,
+    changeTheme,
     orientation,
+    changeOrientation,
     files,
     selectedFile,
     changeFileContent,
@@ -16,11 +19,15 @@ export default function NonMobileLayout({
     selectedSideBar,
     changeSelectedSideBar,
     download,
-    openSettings
+    settingsPosition,
+    changeSettingsPosition
 }: {
-    lang: "pt-br" | "en",
-    theme: keyof typeof themes,
-    orientation: "backwards" | "forwards",
+    lang: AvailableLangs,
+    changeLang: (lang: AvailableLangs) => void,
+    theme: AvailableThemes,
+    changeTheme: (theme: AvailableThemes) => void,
+    orientation: AvailableOrientations,
+    changeOrientation: (orientation: AvailableOrientations) => void,
     files: File[],
     selectedFile: File,
     changeFileContent: (content: string) => void,
@@ -29,7 +36,8 @@ export default function NonMobileLayout({
     selectedSideBar: "files" | "chat" | undefined,
     changeSelectedSideBar: (sideBar: "files" | "chat") => void,
     download: () => void,
-    openSettings: () => void
+    settingsPosition: { x: number, y: number } | undefined,
+    changeSettingsPosition: (pos: { x: number, y: number } | undefined) => void
 }) {
     const openedFiles = files.filter(f => f.isOpen);
 
@@ -55,15 +63,29 @@ export default function NonMobileLayout({
             selectedSideBar={selectedSideBar}
             changeSelectedSideBar={changeSelectedSideBar}
             download={download}
-            openSettings={openSettings}
+            openSettings={(e, pos) => {settingsPosition === undefined && e.stopPropagation(); changeSettingsPosition(pos);}}
             orientation={orientation}
             lang={lang}
             theme={theme}
         />
     ];
 
-    return orientation === "backwards" ?
-        orderedChildren
-        :
-        [ ...orderedChildren ].reverse();
+    return <>
+        {orientation === "backwards" ?
+            orderedChildren
+            :
+            [ ...orderedChildren ].reverse()
+        }
+        <SettingsModal
+            position={settingsPosition}
+            updatePosition={changeSettingsPosition}
+            closeSettings={() => changeSettingsPosition(undefined)}
+            lang={lang}
+            changeLang={changeLang}
+            orientation={orientation}
+            changeOrientation={changeOrientation}
+            theme={theme}
+            changeTheme={changeTheme}
+        />
+    </>;
 }

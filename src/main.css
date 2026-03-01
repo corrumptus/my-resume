@@ -171,3 +171,36 @@ textarea {
     position: absolute;
     resize: none;
 }
+
+.settings {
+    padding: .3em;
+    border: 1px solid var(--componentSeparatorBorderColor);
+    border-radius: .5em;
+    background-color: var(--secondaryBgColor);
+    color: var(--text);
+    position: absolute;
+    font-family: sans-serif;
+}
+
+.settings ul {
+    padding: .3em .5em .3em 1.5em;
+    margin: unset;
+    display: flex;
+    flex-direction: column;
+    gap: .3em;
+    list-style-type: none;
+}
+
+.settings .orientation ul {
+    border-block: 1px solid var(--componentSeparatorBorderColor);
+}
+
+.settings ul li {
+    cursor: pointer;
+    padding: 0px .5em;
+    border-radius: .5em;
+}
+
+.settings ul li:hover {
+    background-color: var(--closeTabButtonBgColor);
+}

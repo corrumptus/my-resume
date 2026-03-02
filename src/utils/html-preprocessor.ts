@@ -42,6 +42,7 @@ export default function htmlPreProcessor(html: string) {
                 loc.endOffset - loc.startOffset
             ) {
                 push("text", loc.startOffset, loc.startOffset + 1);
+                push("text", loc.startOffset + 1, loc.endOffset - 1);
                 push("text", loc.endOffset - 1, loc.endOffset);
             } else
                 push("text", loc.startOffset, loc.endOffset);

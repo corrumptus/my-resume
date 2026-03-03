@@ -37,8 +37,30 @@ aside {
 }
 
 aside header {
-    padding: .5em .5em 0px .5em;
+    padding: .3em .5em 0px .5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-weight: bold;
+}
+
+aside header button {
+    width: fit-content;
+    height: fit-content;
+    padding: .2em .2em .2em .1em;
+    border: none;
+    border-radius: .2em;
+    background-color: unset;
+    cursor: pointer;
+}
+
+aside header button:hover {
+    background-color: var(--closeTabButtonBgColor);
+}
+
+aside header button img {
+    filter: invert(var(--iconColor));
+    display: block;
 }
 
 aside ul {
@@ -50,6 +72,16 @@ aside ul {
 aside ul li {
     padding: .1em .5em .1em 1.5em;
     cursor: pointer;
+}
+
+#newFileInput input {
+    width: 100%;
+    border: 1px solid var(--componentSeparatorBorderColor);
+    border-radius: .5em;
+    background-color: unset;
+    color: var(--folderFileNameColor);
+    font-size: 16px;
+    outline: none;
 }
 
 aside ul li.selected {

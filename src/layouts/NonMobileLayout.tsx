@@ -13,6 +13,7 @@ export default function NonMobileLayout({
     changeOrientation,
     files,
     selectedFile,
+    newFile,
     changeFileContent,
     selectFile,
     closeFile,
@@ -30,6 +31,7 @@ export default function NonMobileLayout({
     changeOrientation: (orientation: AvailableOrientations) => void,
     files: File[],
     selectedFile: File,
+    newFile: (name: string) => void,
     changeFileContent: (content: string) => void,
     selectFile: (fileName: string) => void,
     closeFile: (fileName: string) => void,
@@ -54,7 +56,9 @@ export default function NonMobileLayout({
         />,
         <PrimarySideBar
             key={1}
+            lang={lang}
             files={files}
+            newFile={newFile}
             selectedFile={selectedFile}
             selectFile={selectFile}
         />,

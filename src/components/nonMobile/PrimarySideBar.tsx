@@ -21,6 +21,8 @@ export default function PrimarySideBar({
         if (!isVisible)
             return;
 
+        (document.querySelector("#newFileInput input") as HTMLInputElement).focus();
+
         function onClick(e: MouseEvent) {
             if ((e.target as Element).closest("#newFileInput") === null) {
                 setIsVisible(false);

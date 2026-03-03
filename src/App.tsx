@@ -80,6 +80,29 @@ export default function App() {
 		});
     }
 
+	function newFile(name: string) {
+		if (
+			name === "currículo"
+			||
+			name === "resume"
+			||
+			files.find(f => f.name === name) !== undefined
+		)
+			return;
+
+		setFiles(prevFiles => {
+			const newFile: File = {
+				name: name,
+				content: "",
+				isOpen: true
+			};
+
+			return [ ...prevFiles, newFile ];
+		});
+
+		setFileSelectionStack(prevFileSelectionStack => [ ...prevFileSelectionStack, name ]);
+	}
+
 	function changeFileContent(content: string) {
 		setFiles(prevFiles => {
 			const selectedFile = prevFiles.find(f => f.name === fileSelectionStack.at(-1) as string) as File;

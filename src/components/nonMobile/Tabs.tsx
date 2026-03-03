@@ -46,22 +46,13 @@ export default function Tabs({
                         }}
                     >
                         <span>{f.name}</span>
-                        <span id="close" onClick={e => { e.stopPropagation(); closeFile(f.name); }}>
-                            <div
-                                className="stick primary"
-                                style={{
-                                    visibility: i !== 0 && f.name === selectedFile.name ? "visible" : "hidden"
-                                }}
-                            >
-                            </div>
-                            <div
-                                className="stick secondary"
-                                style={{
-                                    visibility: i !== 0 && f.name === selectedFile.name ? "visible" : "hidden"
-                                }}
-                            >
-                            </div>
-                        </span>
+                        <span
+                            id="close"
+                            onClick={e => { e.stopPropagation(); closeFile(f.name); }}
+                            onMouseEnter={e => (e.target as HTMLSpanElement).style.visibility = i !== 0 ? "visible" : "" }
+                            onMouseLeave={e => (e.target as HTMLSpanElement).style.visibility = "" }
+                            style={{ visibility: i !== 0 && f.name === selectedFile.name ? "visible" : "hidden" }}
+                        ></span>
                     </button>
                 )}
             </header>

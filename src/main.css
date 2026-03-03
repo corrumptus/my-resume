@@ -140,10 +140,9 @@ main #browser header button {
 
 main #files header button #close {
     width: 1em;
-    height: calc(1em + 2px);
+    height: 1em;
     padding: .2em;
-    display: grid;
-    place-items: center;
+    position: relative;
 }
 
 main #files header button #close:hover {
@@ -151,7 +150,10 @@ main #files header button #close:hover {
     border-radius: .3em;
 }
 
-main #files header button #close .stick {
+main #files header button #close::before,
+main #files header button #close::after {
+    content: '';
+    position: absolute;
     width: 1px;
     height: 1em;
     grid-column: 1;
@@ -159,15 +161,11 @@ main #files header button #close .stick {
     background-color: var(--focusedTabFileNameColor);
 }
 
-main #files header button #close:hover .stick {
-    visibility: visible;
-}
-
-main #files header button #close .primary {
+main #files header button #close::before {
     transform: rotate(45deg);
 }
 
-main #files header button #close .secondary {
+main #files header button #close::after {
     transform: rotate(-45deg);
 }
 

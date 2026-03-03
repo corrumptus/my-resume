@@ -30,7 +30,7 @@ export default function Tabs({
         </div>
         <div id="files">
             <header>
-                {openedFiles.map(f =>
+                {openedFiles.map((f, i) =>
                     <button
                         key={f.name}
                         onClick={() => selectFile(f.name)}
@@ -46,18 +46,18 @@ export default function Tabs({
                         }}
                     >
                         <span>{f.name}</span>
-                        <span id="close" onClick={() => closeFile(f.name)}>
+                        <span id="close" onClick={e => { e.stopPropagation(); closeFile(f.name); }}>
                             <div
                                 className="stick primary"
                                 style={{
-                                    visibility: f.name === selectedFile.name ? "visible" : "hidden"
+                                    visibility: i !== 0 && f.name === selectedFile.name ? "visible" : "hidden"
                                 }}
                             >
                             </div>
                             <div
                                 className="stick secondary"
                                 style={{
-                                    visibility: f.name === selectedFile.name ? "visible" : "hidden"
+                                    visibility: i !== 0 && f.name === selectedFile.name ? "visible" : "hidden"
                                 }}
                             >
                             </div>
@@ -66,7 +66,11 @@ export default function Tabs({
                 )}
             </header>
             <div className="tabBody">
-                <CodeTab code={selectedFile.content} setCode={changeFileContent} theme={theme} />
+                <CodeTab
+                    code={selectedFile.content}
+                    setCode={changeFileContent}
+                    theme={theme}
+                />
             </div>
         </div>
     </main>;

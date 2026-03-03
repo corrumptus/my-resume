@@ -15,10 +15,7 @@ export default function App() {
 		{
 			name: "currículo.html",
 			content: resume,
-			canDelete: false,
-			isOpen: true,
-			canClose: false,
-			isSelected: true
+			isOpen: true
 		}
 	]);
 	const [ fileSelectionStack, setFileSelectionStack ] = useState<string[]>(["currículo.html"]);
@@ -98,68 +95,42 @@ export default function App() {
 			return;
 
 		setFiles(prevFiles => {
-			let curSelectedFileIndex = null;
-			let fileWithNameIndex = null;
+			const file = prevFiles.find(f => f.name === fileName)!;
 
-			let i = 0;
-
-			while (
-				curSelectedFileIndex !== null
-				&&
-				fileWithNameIndex !== null
-				||
-				i < prevFiles.length
-			) {
-				if (prevFiles[i].isSelected)
-					curSelectedFileIndex = i;
-
-				if (prevFiles[i].name === fileName)
-					fileWithNameIndex = i;
-
-				i++;
-			}
-
-			if (curSelectedFileIndex === null || fileWithNameIndex === null) {
-				alert(lang === "pt-br" ? "Algo deu errado. A página será recarregada. :(" : "Something went wrong. The page will be reloaded. :(");
-				window.location.reload();
-				return [ ...prevFiles ];
-			}
-
-			prevFiles[curSelectedFileIndex].isSelected = false;
-			prevFiles[fileWithNameIndex].isSelected = true;
-
-			setFileSelectionStack(prevFileSelectionStack => {
-				const fileInStackIndex = prevFileSelectionStack.indexOf(fileName);
-
-				if (fileInStackIndex !== -1)
-					prevFileSelectionStack.splice(fileInStackIndex, 1);
-
-				prevFileSelectionStack.push(fileName);
-
-				return [ ...prevFileSelectionStack ];
-			});
+			file.isOpen = true;
 
 			return [ ...prevFiles ];
+		});
+
+		setFileSelectionStack(prevFileSelectionStack => {
+			const index = prevFileSelectionStack.indexOf(fileName);
+
+			prevFileSelectionStack.splice(index, 1);
+
+			prevFileSelectionStack.push(fileName);
+
+			return [ ...prevFileSelectionStack ];
 		});
 	}
 
 	function closeFile(fileName: string) {
+		const fileIndex = files.findIndex(f => f.name === fileName);
+
+		if (fileIndex === 0)
+			return;
+
 		setFiles(prevFiles => {
-			const fileIndex = prevFiles.findIndex(f => f.name === fileName);
-
-			if (prevFiles[fileIndex].canClose)
-				prevFiles[fileIndex].isOpen = false;
-
-			setFileSelectionStack(prevFileSelectionStack => {
-				const fileInStackIndex = prevFileSelectionStack.indexOf(fileName);
-
-				if (fileInStackIndex !== -1)
-					prevFileSelectionStack.splice(fileInStackIndex, 1);
-
-				return [ ...prevFileSelectionStack ];
-			});
+			prevFiles[fileIndex].isOpen = false;
 
 			return [ ...prevFiles ];
+		});
+
+		setFileSelectionStack(prevFileSelectionStack => {
+			const fileInStackIndex = prevFileSelectionStack.indexOf(fileName);
+
+			prevFileSelectionStack.splice(fileInStackIndex, 1);
+
+			return [ ...prevFileSelectionStack ];
 		});
 	}
 
@@ -174,6 +145,7 @@ export default function App() {
 			"currículo - Lucas Lazarini.pdf"
 			:
 			"resume - Lucas Lazarini.pdf";
+
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
@@ -201,6 +173,7 @@ export default function App() {
 			changeOrientation={setNonMobileOrientation}
 			files={files}
 			selectedFile={files.find(f => f.name === fileSelectionStack.at(-1) as string) as File}
+			newFile={newFile}
 			changeFileContent={changeFileContent}
 			selectFile={selectFile}
 			closeFile={closeFile}

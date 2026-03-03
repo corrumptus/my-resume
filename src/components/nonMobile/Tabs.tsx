@@ -49,9 +49,9 @@ export default function Tabs({
                         <span
                             id="close"
                             onClick={e => { e.stopPropagation(); closeFile(f.name); }}
-                            onMouseEnter={e => (e.target as HTMLSpanElement).style.visibility = i !== 0 ? "visible" : "" }
-                            onMouseLeave={e => (e.target as HTMLSpanElement).style.visibility = "" }
-                            style={{ visibility: i !== 0 && f.name === selectedFile.name ? "visible" : "hidden" }}
+                            onMouseEnter={e => (e.target as HTMLSpanElement).style.opacity = i !== 0 ? "1" : "0"}
+                            onMouseLeave={e => (e.target as HTMLSpanElement).style.opacity = i !== 0 && f.name === selectedFile.name ? "1" : "0"}
+                            style={{ opacity: i !== 0 && f.name === selectedFile.name ? "1" : "0" }}
                         ></span>
                     </button>
                 )}

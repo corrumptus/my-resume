@@ -128,7 +128,8 @@ export default function App() {
 		setFileSelectionStack(prevFileSelectionStack => {
 			const index = prevFileSelectionStack.indexOf(fileName);
 
-			prevFileSelectionStack.splice(index, 1);
+			if (index !== -1)
+				prevFileSelectionStack.splice(index, 1);
 
 			prevFileSelectionStack.push(fileName);
 

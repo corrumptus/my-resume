@@ -9,10 +9,7 @@ export type AvailableOrientations = "backwards" | "forwards";
 export type File = {
 	name: string,
 	content: string,
-	canDelete: boolean,
-	isOpen: boolean,
-	canClose: boolean,
-	isSelected: boolean
+	isOpen: boolean
 };
 
 export type Theme = {

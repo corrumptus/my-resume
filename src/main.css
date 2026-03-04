@@ -169,8 +169,14 @@ main #files header button #close::after {
     transform: rotate(-45deg);
 }
 
-main #files .code {
+main #files .tabBody {
+    height: 100%;
+    overflow: auto;
+}
+
+main #files .tabBody .code {
     width: fit-content;
+    min-width: 100%;
     height: 100%;
     position: relative;
     font-family: sans-serif;
@@ -184,6 +190,7 @@ pre, textarea {
 }
 
 pre {
+    width: fit-content;
     pointer-events: none;
 }
 

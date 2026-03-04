@@ -52,7 +52,8 @@ export default function Tabs({
                             borderTopColor: f.name === selectedFile.name ?
                                 themes[theme].selectedThing
                                 :
-                                undefined
+                                undefined,
+                            padding: i === 0 ? ".6em 1em" : undefined
                         }}
                     >
                         <span>{f.name}</span>
@@ -61,7 +62,10 @@ export default function Tabs({
                             onClick={e => { e.stopPropagation(); closeFile(f.name); }}
                             onMouseEnter={e => (e.target as HTMLSpanElement).style.opacity = i !== 0 ? "1" : "0"}
                             onMouseLeave={e => (e.target as HTMLSpanElement).style.opacity = i !== 0 && f.name === selectedFile.name ? "1" : "0"}
-                            style={{ opacity: i !== 0 && f.name === selectedFile.name ? "1" : "0" }}
+                            style={{
+                                opacity: i !== 0 && f.name === selectedFile.name ? "1" : "0",
+                                display: i === 0 ? "none" : "block"
+                            }}
                         ></span>
                     </button>
                 )}

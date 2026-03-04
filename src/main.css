@@ -175,8 +175,9 @@ main #files .tabBody {
 }
 
 main #files .tabBody .code {
-    position: relative;
     width: fit-content;
+    height: 100%;
+    position: relative;
     font-family: sans-serif;
 }
 
@@ -192,6 +193,7 @@ pre {
 }
 
 textarea {
+    height: calc(100% - 1em);
     inset: 0;
     border: unset;
     background: transparent;

@@ -25,7 +25,7 @@ nav button:last-child {
 nav button img {
     width: 30px;
     display: block;
-    filter: invert(1);
+    filter: invert(var(--iconColor));
 }
 
 aside {

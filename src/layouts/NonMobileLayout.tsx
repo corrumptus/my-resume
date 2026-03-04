@@ -20,6 +20,8 @@ export default function NonMobileLayout({
     selectedSideBar,
     changeSelectedSideBar,
     download,
+    downloadFile,
+    remove,
     settingsPosition,
     changeSettingsPosition
 }: {
@@ -38,6 +40,8 @@ export default function NonMobileLayout({
     selectedSideBar: "files" | "chat" | undefined,
     changeSelectedSideBar: (sideBar: "files" | "chat") => void,
     download: () => void,
+    downloadFile: (fileName: string) => void,
+    remove: (fileName: string) => void,
     settingsPosition: { x: number, y: number } | undefined,
     changeSettingsPosition: (pos: { x: number, y: number } | undefined) => void
 }) {
@@ -57,10 +61,13 @@ export default function NonMobileLayout({
         <PrimarySideBar
             key={1}
             lang={lang}
+            orientation={orientation}
             files={files}
             newFile={newFile}
             selectedFile={selectedFile}
             selectFile={selectFile}
+            download={downloadFile}
+            remove={remove}
         />,
         <Buttons
             key={2}

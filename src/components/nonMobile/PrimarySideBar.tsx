@@ -1,21 +1,28 @@
 import { useEffect, useState, type KeyboardEvent } from "react";
-import type { AvailableLangs, File } from "../../main";
+import type { AvailableLangs, AvailableOrientations, File } from "../../main";
 
 export default function PrimarySideBar({
     lang,
+    orientation,
     files,
     newFile,
     selectedFile,
-    selectFile
+    selectFile,
+    download,
+    remove
 }: {
     lang: AvailableLangs,
+    orientation: AvailableOrientations,
     files: File[],
     newFile: (name: string) => void,
     selectedFile: File,
-    selectFile: (fileName: string) => void
+    selectFile: (fileName: string) => void,
+    download: (fileName: string) => void,
+    remove: (fileName: string) => void
 }) {
     const [ isVisible, setIsVisible ] = useState(false);
     const [ newFileName, setNewFileName ] = useState("");
+    const [ option, setOptions ] = useState<{ x: number, y: number, file: string, index: number }>();
 
     useEffect(() => {
         if (!isVisible)
@@ -30,10 +37,47 @@ export default function PrimarySideBar({
             }
         }
 
+        function onAuxClick() {
+            setIsVisible(false);
+            setNewFileName("");
+            setOptions(prevOptions => {
+                if (prevOptions === undefined)
+                    return undefined;
+                
+                return {
+                    ...prevOptions,
+                    y: prevOptions.y - 26
+                };
+            });
+        }
+
+        window.addEventListener("click", onClick);
+        window.addEventListener("auxclick", onAuxClick);
+
+        return () => {
+            window.removeEventListener("click", onClick);
+            window.removeEventListener("auxclick", onAuxClick);
+        };
+    }, [isVisible]);
+
+    useEffect(() => {
+        if (option === undefined)
+            return;
+
+        function onClick(e: MouseEvent) {
+            if (
+                (e.target as Element).closest(`#options button`) !== null
+                ||
+                (e.target as Element).closest(`#options`) === null
+            ) {
+                setOptions(undefined);
+            }
+        }
+
         window.addEventListener("click", onClick);
 
         return () => window.removeEventListener("click", onClick);
-    }, [isVisible]);
+    }, [option?.x, option?.y]);
 
     function onKeyDown(e: KeyboardEvent) {
         if (e.key === "Enter") {
@@ -84,15 +128,29 @@ export default function PrimarySideBar({
                 />
                 <span>.html</span>
             </li>
-            {files.map(f =>
+            {files.map((f, i) =>
                 <li
                     key={f.name}
                     onClick={() => selectFile(f.name)}
+                    onContextMenu={e => { e.preventDefault(); setOptions({ x: e.clientX, y: e.clientY, file: f.name, index: i }); }}
                     className={selectedFile.name === f.name ? "selected" : ""}
                 >
                     {f.name}
                 </li>
             )}
         </ul>
+        <div
+            id="options"
+            style={{
+                right: orientation === "backwards" ? `calc(100% - ${option?.x}px)` : undefined,
+                left: orientation === "forwards" ? option?.x : undefined,
+                top: option?.y,
+                opacity: option !== undefined ? 100 : 0,
+                pointerEvents: option !== undefined ? "auto" : "none"
+            }}
+        >
+            <button onClick={() => download(option!.file)}>{lang === "pt-br" ? "Baixar arquivo" : "Download file"}</button>
+            <button onClick={() => remove(option!.file)}>{lang === "pt-br" ? "Excluir arquivo" : "Delete file"}</button>
+        </div>
     </aside>;
 }

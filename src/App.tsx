@@ -158,17 +158,56 @@ export default function App() {
 		});
 	}
 
+	function removeFile(fileName: string) {
+		const fileIndex = files.findIndex(f => f.name === fileName);
+
+		if (fileIndex === 0)
+			return;
+
+		setFiles(prevFiles => {
+			prevFiles.splice(fileIndex, 1);
+
+			return [ ...prevFiles ];
+		});
+
+		setFileSelectionStack(prevFileSelectionStack => {
+			const fileInStackIndex = prevFileSelectionStack.indexOf(fileName);
+
+			prevFileSelectionStack.splice(fileInStackIndex, 1);
+
+			return [ ...prevFileSelectionStack ];
+		});
+	}
+
 	function download() {
 		const blob = new Blob([resume], { type: "text/html;charset=utf-8" });
     	const url = URL.createObjectURL(blob);
 
 		const link = document.createElement("a");
-		link.style.visibility = "hidden";
 		link.href = url;
 		link.download = lang === "pt-br" ?
 			"currículo - Lucas Lazarini.pdf"
 			:
 			"resume - Lucas Lazarini.pdf";
+		link.style.visibility = "hidden";
+
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+
+		URL.revokeObjectURL(url);
+	}
+
+	function downloadFile(fileName: string) {
+		const file = files.find(f => f.name === fileName)!;
+
+		const blob = new Blob([file.content], { type: "text/html;charset=utf-8" });
+    	const url = URL.createObjectURL(blob);
+
+		const link = document.createElement("a");
+		link.href = url;
+		link.download = file.name;
+		link.style.visibility = "hidden";
 
 		document.body.appendChild(link);
 		link.click();
@@ -204,6 +243,8 @@ export default function App() {
 			selectedSideBar={selectedSideBar}
 			changeSelectedSideBar={setSelectedSideBar}
 			download={download}
+			downloadFile={downloadFile}
+			remove={removeFile}
 			settingsPosition={settingsPosition}
 			changeSettingsPosition={setSettingsPosition}
 		/>;

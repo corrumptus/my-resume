@@ -169,12 +169,7 @@ main #files header button #close::after {
     transform: rotate(-45deg);
 }
 
-main #files .tabBody {
-    height: 100%;
-    overflow: auto;
-}
-
-main #files .tabBody .code {
+main #files .code {
     width: fit-content;
     height: 100%;
     position: relative;

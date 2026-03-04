@@ -56,13 +56,11 @@ export default function Tabs({
                     </button>
                 )}
             </header>
-            <div className="tabBody">
-                <CodeTab
-                    code={selectedFile.content}
-                    setCode={changeFileContent}
-                    theme={theme}
-                />
-            </div>
+            <CodeTab
+                code={selectedFile.content}
+                setCode={changeFileContent}
+                theme={theme}
+            />
         </div>
     </main>;
 }

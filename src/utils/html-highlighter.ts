@@ -50,7 +50,7 @@ function highlightText(str: string) {
 }
 
 function highlightComment(str: string) {
-    return `<span style="color: var(--comment);">${str}</span>`;
+    return `<span style="color: var(--comment);">${escapeTagBrackets(str)}</span>`;
 }
 
 export default function htmlHighlighter(html: string) {

@@ -28,7 +28,13 @@ export default function Tabs({
             </header>
             <iframe srcDoc={selectedFile.content} />
         </div>
-        <div id="files">
+        <div
+            id="files"
+            style={{
+                borderLeft: orientation === "backwards" ? "1px solid var(--componentSeparatorBorderColor)" : undefined,
+                borderRight: orientation === "forwards" ? "1px solid var(--componentSeparatorBorderColor)" : undefined
+            }}
+        >
             <header>
                 {openedFiles.map((f, i) =>
                     <button
@@ -42,7 +48,11 @@ export default function Tabs({
                             color: f.name === selectedFile.name ?
                                 themes[theme].focusedTabFileNameColor
                                 :
-                                themes[theme].standbyTabFileNameColor
+                                themes[theme].standbyTabFileNameColor,
+                            borderTopColor: f.name === selectedFile.name ?
+                                themes[theme].selectedThing
+                                :
+                                undefined
                         }}
                     >
                         <span>{f.name}</span>

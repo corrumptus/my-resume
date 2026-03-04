@@ -133,7 +133,7 @@ main :is(#browser, #files) header button {
 }
 
 main #browser header button {
-    padding: calc(0.7em - 1.5px);
+    padding: calc(0.7em - 2px);
     background-color: var(--focusedTabFileBgColor);
     color: var(--focusedTabFileNameColor);
 }

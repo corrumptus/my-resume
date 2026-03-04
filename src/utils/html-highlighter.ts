@@ -1,4 +1,3 @@
-import type { Theme } from "../main";
 import htmlPreProcessor from "./html-preprocessor";
 
 function escapeTagBrackets(s: string) {
@@ -7,54 +6,54 @@ function escapeTagBrackets(s: string) {
         .replaceAll(">", "&gt;");
 }
 
-function highlightRestDoctype(str: string, theme: Theme) {
+function highlightRestDoctype(str: string) {
     return str
         .split(" ")
-        .map(arg => arg.startsWith('"') ? highlightAttrValue(arg, theme) : highlightAttrName(arg, theme))
+        .map(arg => arg.startsWith('"') ? highlightAttrValue(arg) : highlightAttrName(arg))
         .join(" ");
 }
 
-function highlightDoctype(str: string, theme: Theme) {
-    return highlightTagBracket(str.slice(0, 2), theme)
+function highlightDoctype(str: string) {
+    return highlightTagBracket(str.slice(0, 2))
         +
-        highlightTagName(str.slice(2, 9), theme)
+        highlightTagName(str.slice(2, 9))
         +
         " "
         +
-        highlightRestDoctype(str.slice(10, -1), theme)
+        highlightRestDoctype(str.slice(10, -1))
         +
-        highlightTagBracket(str.slice(-1), theme);
+        highlightTagBracket(str.slice(-1));
 }
 
-function highlightTagBracket(str: string, theme: Theme) {
-    return `<span style="color: ${theme.tagBracket}">${escapeTagBrackets(str)}</span>`;
+function highlightTagBracket(str: string) {
+    return `<span style="color: var(--tagBracket);">${escapeTagBrackets(str)}</span>`;
 }
 
-function highlightTagName(str: string, theme: Theme) {
-    return `<span style="color: ${theme.tagName}">${str}</span>`;
+function highlightTagName(str: string) {
+    return `<span style="color: var(--tagName);">${str}</span>`;
 }
 
-function highlightAttrName(str: string, theme: Theme) {
-    return `<span style="color: ${theme.attrName}">${str}</span>`;
+function highlightAttrName(str: string) {
+    return `<span style="color: var(--attrName);">${str}</span>`;
 }
 
-function highlightAttrAssign(str: string, theme: Theme) {
-    return `<span style="color: ${theme.attrAssign}">${str}</span>`;
+function highlightAttrAssign(str: string) {
+    return `<span style="color: var(--attrAssign);">${str}</span>`;
 }
 
-function highlightAttrValue(str: string, theme: Theme) {
-    return `<span style="color: ${theme.attrValue}">${str}</span>`;
+function highlightAttrValue(str: string) {
+    return `<span style="color: var(--attrValue);">${str}</span>`;
 }
 
-function highlightText(str: string, theme: Theme) {
-    return `<span style="color: ${theme.text}">${str}</span>`;
+function highlightText(str: string) {
+    return `<span style="color: var(--text);">${str}</span>`;
 }
 
-function highlightComment(str: string, theme: Theme) {
-    return `<span style="color: ${theme.comment}">${str}</span>`;
+function highlightComment(str: string) {
+    return `<span style="color: var(--comment);">${str}</span>`;
 }
 
-export default function htmlHighlighter(html: string, theme: Theme) {
+export default function htmlHighlighter(html: string) {
     let highlightedHtml = "";
 
     const processed = htmlPreProcessor(html);
@@ -65,15 +64,15 @@ export default function htmlHighlighter(html: string, theme: Theme) {
         highlightedHtml += html.slice(start, info.start);
 
         highlightedHtml += {
-            "doctype": highlightDoctype(html.slice(info.start, info.end), theme),
-            "tagBeginBracket": highlightTagBracket(html.slice(info.start, info.end), theme),
-            "tagEndBracket": highlightTagBracket(html.slice(info.start, info.end), theme),
-            "tagName": highlightTagName(html.slice(info.start, info.end), theme),
-            "attrName": highlightAttrName(html.slice(info.start, info.end), theme),
-            "attrAssign": highlightAttrAssign(html.slice(info.start, info.end), theme),
-            "attrValue": highlightAttrValue(html.slice(info.start, info.end), theme),
-            "text": highlightText(html.slice(info.start, info.end), theme),
-            "comment": highlightComment(html.slice(info.start, info.end), theme),
+            "doctype": highlightDoctype(html.slice(info.start, info.end)),
+            "tagBeginBracket": highlightTagBracket(html.slice(info.start, info.end)),
+            "tagEndBracket": highlightTagBracket(html.slice(info.start, info.end)),
+            "tagName": highlightTagName(html.slice(info.start, info.end)),
+            "attrName": highlightAttrName(html.slice(info.start, info.end)),
+            "attrAssign": highlightAttrAssign(html.slice(info.start, info.end)),
+            "attrValue": highlightAttrValue(html.slice(info.start, info.end)),
+            "text": highlightText(html.slice(info.start, info.end)),
+            "comment": highlightComment(html.slice(info.start, info.end)),
         }[info.type] || "";
 
         start = info.end;

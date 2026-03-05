@@ -74,7 +74,6 @@ export default function Tabs({
                 <CodeTab
                     code={selectedFile.content}
                     setCode={changeFileContent}
-                    theme={theme}
                 />
             </div>
         </div>

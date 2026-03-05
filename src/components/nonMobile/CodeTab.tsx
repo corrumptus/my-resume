@@ -1,37 +1,33 @@
 import { useRef, type RefObject } from "react";
 import htmlHighlighter from "../../utils/html-highlighter";
-import themes from "../../utils/themes";
-import type { AvailableThemes } from "../../main";
 
 export default function CodeTab({
     code,
-    setCode,
-    theme
+    setCode
 }: {
     code: string,
-    setCode: (code: string) => void,
-    theme: AvailableThemes
+    setCode: (code: string) => void
 }) {
     const preRef = useRef<HTMLPreElement>(null) as RefObject<HTMLPreElement>;
     const taRef = useRef<HTMLTextAreaElement>(null) as RefObject<HTMLTextAreaElement>;
 
-    const highlighted = htmlHighlighter(code, themes[theme]);
+    const highlighted = htmlHighlighter(code);
 
     function syncScroll() {
-        preRef.current!.scrollTop = taRef.current.scrollTop;
-        preRef.current!.scrollLeft = taRef.current.scrollLeft;
+        preRef.current.scrollTop = taRef.current.scrollTop;
+        preRef.current.scrollLeft = taRef.current.scrollLeft;
     }
 
     return <div className="code">
         <pre
             ref={preRef}
             aria-hidden="true"
-            dangerouslySetInnerHTML={{ __html: highlighted + "\n" }}
+            dangerouslySetInnerHTML={{ __html: highlighted }}
         />
         <textarea
             ref={taRef}
             value={code}
-            onChange={(e) => setCode(e.target.value)}
+            onChange={e => setCode(e.target.value)}
             onScroll={syncScroll}
             spellCheck={false}
         />

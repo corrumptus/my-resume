@@ -23,39 +23,37 @@ function translateThemeName(lang: AvailableLangs, themeName: AvailableThemes) {
 }
 
 export default function SettingsModal({
-    position,
-    updatePosition,
-    closeSettings,
     lang,
     changeLang,
     orientation,
     changeOrientation,
     theme,
-    changeTheme
+    changeTheme,
+    position,
+    updatePosition,
+    closeSettings,
+    modal
 }: {
-    position: { x: number, y: number } | undefined,
-    updatePosition: (newPosition: { x: number, y: number }) => void,
-    closeSettings: () => void,
     lang: AvailableLangs,
     changeLang: (lang: AvailableLangs) => void,
     orientation: AvailableOrientations,
     changeOrientation: (orientation: AvailableOrientations) => void,
     theme: AvailableThemes,
-    changeTheme: (theme: AvailableThemes) => void
+    changeTheme: (theme: AvailableThemes) => void,
+    position: { x: number, y: number } | undefined,
+    updatePosition: (newPosition: { x: number, y: number }) => void,
+    closeSettings: () => void,
+    modal: "newFile" | "options" | "settings" | undefined
 }) {
     useEffect(() => {
-        if (position === undefined)
+        if (modal !== "settings")
             return;
 
-        function clickHandler(e: MouseEvent) {
-            if ((e.target as Element).closest(".settings") === null)
-                closeSettings();
-        }
-
-        window.addEventListener("click", clickHandler);
-
-        return () => window.removeEventListener("click", clickHandler);
-    }, [position]);
+        return () => {
+            closeSettings();
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modal]);
 
     function setNewOrientation(newOrientation: AvailableOrientations) {
         changeOrientation(newOrientation);

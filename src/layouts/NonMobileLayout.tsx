@@ -23,7 +23,11 @@ export default function NonMobileLayout({
     downloadFile,
     remove,
     settingsPosition,
-    changeSettingsPosition
+    changeSettingsPosition,
+    modal,
+    changeModal,
+    option,
+    changeOption
 }: {
     lang: AvailableLangs,
     changeLang: (lang: AvailableLangs) => void,
@@ -37,13 +41,17 @@ export default function NonMobileLayout({
     changeFileContent: (content: string) => void,
     selectFile: (fileName: string) => void,
     closeFile: (fileName: string) => void,
-    selectedSideBar: "files" | "chat" | undefined,
+    selectedSideBar: "files" | "chat",
     changeSelectedSideBar: (sideBar: "files" | "chat") => void,
     download: () => void,
-    downloadFile: (fileName: string) => void,
+    downloadFile: (file: File) => void,
     remove: (fileName: string) => void,
     settingsPosition: { x: number, y: number } | undefined,
-    changeSettingsPosition: (pos: { x: number, y: number } | undefined) => void
+    changeSettingsPosition: (pos: { x: number, y: number } | undefined) => void,
+    modal: "newFile" | "options" | "settings" | undefined,
+    changeModal: (modal: "newFile" | "options" | "settings" | undefined) => void,
+    option: { x: number, y: number, file: File, index: number } | undefined,
+    changeOption: (option: { x: number, y: number, file: File, index: number } | undefined) => void
 }) {
     const openedFiles = files.filter(f => f.isOpen);
 
@@ -68,16 +76,21 @@ export default function NonMobileLayout({
             selectFile={selectFile}
             download={downloadFile}
             remove={remove}
+            modal={modal}
+            changeModal={changeModal}
+            option={option}
+            changeOption={changeOption}
         />,
         <Buttons
             key={2}
             selectedSideBar={selectedSideBar}
             changeSelectedSideBar={changeSelectedSideBar}
             download={download}
-            openSettings={(e, pos) => {settingsPosition === undefined && e.stopPropagation(); changeSettingsPosition(pos);}}
+            openSettings={(e, pos) => { modal !== "settings" && e.stopPropagation(); changeSettingsPosition(pos); }}
             orientation={orientation}
             lang={lang}
             theme={theme}
+            changeModal={changeModal}
         />
     ];
 
@@ -97,6 +110,7 @@ export default function NonMobileLayout({
             changeOrientation={changeOrientation}
             theme={theme}
             changeTheme={changeTheme}
+            modal={modal}
         />
     </>;
 }

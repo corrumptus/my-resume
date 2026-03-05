@@ -1,4 +1,4 @@
-import { useEffect, useState, type KeyboardEvent } from "react";
+import { useEffect, useState, type KeyboardEvent, type MouseEvent } from "react";
 import type { AvailableLangs, AvailableOrientations, File } from "../../main";
 
 export default function PrimarySideBar({
@@ -9,7 +9,11 @@ export default function PrimarySideBar({
     selectedFile,
     selectFile,
     download,
-    remove
+    remove,
+    modal,
+    changeModal,
+    option,
+    changeOption
 }: {
     lang: AvailableLangs,
     orientation: AvailableOrientations,
@@ -17,67 +21,56 @@ export default function PrimarySideBar({
     newFile: (name: string) => void,
     selectedFile: File,
     selectFile: (fileName: string) => void,
-    download: (fileName: string) => void,
-    remove: (fileName: string) => void
+    download: (file: File) => void,
+    remove: (fileName: string) => void,
+    modal: "newFile" | "options" | "settings" | undefined,
+    changeModal: (modal: "newFile" | "options" | "settings" | undefined) => void,
+    option: { x: number, y: number, file: File, index: number } | undefined,
+    changeOption: (option: { x: number, y: number, file: File, index: number } | undefined) => void
 }) {
-    const [ isVisible, setIsVisible ] = useState(false);
     const [ newFileName, setNewFileName ] = useState("");
-    const [ option, setOptions ] = useState<{ x: number, y: number, file: string, index: number }>();
 
     useEffect(() => {
-        if (!isVisible)
+        if (modal !== "newFile")
             return;
 
         (document.querySelector("#newFileInput input") as HTMLInputElement).focus();
 
-        function onClick(e: MouseEvent) {
-            if ((e.target as Element).closest("#newFileInput") === null) {
-                setIsVisible(false);
-                setNewFileName("");
-            }
-        }
-
-        function onAuxClick() {
-            setIsVisible(false);
-            setNewFileName("");
-            setOptions(prevOptions => {
-                if (prevOptions === undefined)
-                    return undefined;
-                
-                return {
-                    ...prevOptions,
-                    y: prevOptions.y - 26
-                };
-            });
-        }
-
-        window.addEventListener("click", onClick);
-        window.addEventListener("auxclick", onAuxClick);
-
         return () => {
-            window.removeEventListener("click", onClick);
-            window.removeEventListener("auxclick", onAuxClick);
+            setNewFileName("");
         };
-    }, [isVisible]);
+    }, [modal]);
+
+    function handleNewFileClick(e: MouseEvent) {
+        if (modal !== "newFile")
+            e.stopPropagation();
+
+        changeModal("newFile");
+    }
 
     useEffect(() => {
-        if (option === undefined)
+        if (modal !== "options")
             return;
 
-        function onClick(e: MouseEvent) {
-            if (
-                (e.target as Element).closest(`#options button`) !== null
-                ||
-                (e.target as Element).closest(`#options`) === null
-            ) {
-                setOptions(undefined);
-            }
-        }
+        return () => {
+            changeOption(undefined);
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modal]);
 
-        window.addEventListener("click", onClick);
+    function handleOptionsAuxClick(e: MouseEvent, f: File, i: number) {
+        e.preventDefault();
 
-        return () => window.removeEventListener("click", onClick);
-    }, [option?.x, option?.y]);
+        if (modal !== "options")
+            e.stopPropagation();
+
+        if (modal === "newFile")
+            changeOption({ x: e.clientX, y: e.clientY - 26, file: f, index: i });
+        else
+            changeOption({ x: e.clientX, y: e.clientY, file: f, index: i });
+
+        changeModal("options");
+    }
 
     function onKeyDown(e: KeyboardEvent) {
         if (e.key === "Enter") {
@@ -90,8 +83,7 @@ export default function PrimarySideBar({
 
             e.preventDefault();
             newFile(newFileName + ".html");
-            setNewFileName("");
-            setIsVisible(false);
+            changeModal(undefined);
         }
     }
 
@@ -109,7 +101,7 @@ export default function PrimarySideBar({
         <header>
             <span>Lucas Lazarini</span>
             <button
-                onClick={e => {!isVisible && e.stopPropagation(); setIsVisible(true);}}
+                onClick={handleNewFileClick}
                 title={lang === "pt-br" ? "Criar novo arquivo" : "create new file"}
             >
                 <img
@@ -119,7 +111,7 @@ export default function PrimarySideBar({
             </button>
         </header>
         <ul>
-            <li id="newFileInput" style={{ display: isVisible ? "flex" : "none" }}>
+            <li id="newFileInput" style={{ display: modal === "newFile" ? "flex" : "none" }}>
                 <input
                     value={newFileName}
                     onKeyDown={onKeyDown}
@@ -132,7 +124,7 @@ export default function PrimarySideBar({
                 <li
                     key={f.name}
                     onClick={() => selectFile(f.name)}
-                    onContextMenu={e => { e.preventDefault(); setOptions({ x: e.clientX, y: e.clientY, file: f.name, index: i }); }}
+                    onContextMenu={e => handleOptionsAuxClick(e, f, i)}
                     className={selectedFile.name === f.name ? "selected" : ""}
                 >
                     {f.name}
@@ -145,12 +137,12 @@ export default function PrimarySideBar({
                 right: orientation === "backwards" ? `calc(100% - ${option?.x}px)` : undefined,
                 left: orientation === "forwards" ? option?.x : undefined,
                 top: option?.y,
-                opacity: option !== undefined ? 100 : 0,
-                pointerEvents: option !== undefined ? "auto" : "none"
+                opacity: modal === "options" ? 100 : 0,
+                pointerEvents: modal === "options" ? "auto" : "none"
             }}
         >
             <button onClick={() => download(option!.file)}>{lang === "pt-br" ? "Baixar arquivo" : "Download file"}</button>
-            <button onClick={() => remove(option!.file)}>{lang === "pt-br" ? "Excluir arquivo" : "Delete file"}</button>
+            <button onClick={() => remove(option!.file.name)}>{lang === "pt-br" ? "Excluir arquivo" : "Delete file"}</button>
         </div>
     </aside>;
 }

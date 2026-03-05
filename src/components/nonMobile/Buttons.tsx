@@ -9,7 +9,8 @@ export default function Buttons({
     openSettings,
     orientation,
     lang,
-    theme
+    theme,
+    changeModal
 }: {
     selectedSideBar: "files" | "chat" | undefined,
     changeSelectedSideBar: (sideBar: "files" | "chat") => void,
@@ -17,7 +18,8 @@ export default function Buttons({
     openSettings: (e: MouseEvent, pos: { x: number, y: number }) => void,
     orientation: AvailableOrientations,
     lang: AvailableLangs,
-    theme: AvailableThemes
+    theme: AvailableThemes,
+    changeModal: (modal: "newFile" | "options" | "settings" | undefined) => void
 }) {
     return <nav>
         <button
@@ -45,7 +47,7 @@ export default function Buttons({
             <img src="https://raw.githubusercontent.com/microsoft/vscode-codicons/542ec2a3375b21d42d4b75a995c4feb896aad305/src/icons/download.svg" alt="a arrow pointing to the bottom" />
         </button>
         <button
-            onClick={e => openSettings(e, { x: e.clientX, y: e.clientY })}
+            onClick={e => { changeModal("settings"); openSettings(e, { x: e.clientX, y: e.clientY }); }}
             title={lang === "pt-br" ? "Configurações" : "Settings"}
         >
             <img src="https://raw.githubusercontent.com/microsoft/vscode-codicons/542ec2a3375b21d42d4b75a995c4feb896aad305/src/icons/settings-gear.svg" alt="a gear" />

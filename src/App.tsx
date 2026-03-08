@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NonMobileLayout from "./layouts/NonMobileLayout";
 import MobileLayout from "./layouts/MobileLayout";
 import { MAX_MOBILE_WIDTH } from "./main";
@@ -47,6 +47,11 @@ export default function App() {
 		selectedMenu,
 		setSelectedMenu
 	] = useMobileVariables();
+
+	useEffect(() => {
+		document.body.className =
+			width <= MAX_MOBILE_WIDTH ? "mobile" : "nonMobile";
+	}, [width]);
 
 	function download() {
 		const blob = new Blob([resume], { type: "text/html;charset=utf-8" });

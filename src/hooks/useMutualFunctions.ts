@@ -33,12 +33,14 @@ export default function useMutualFunctions(
 			name === "resume"
 			||
 			files.find(f => f.name === name) !== undefined
+			||
+			name.trim() === ""
 		)
 			return;
 
 		setFiles(prevFiles => {
 			const newFile: File = {
-				name: name,
+				name: name.trim(),
 				content: "",
 				isOpen: true
 			};
@@ -119,7 +121,8 @@ export default function useMutualFunctions(
 		setFileSelectionStack(prevFileSelectionStack => {
 			const fileInStackIndex = prevFileSelectionStack.indexOf(fileName);
 
-			prevFileSelectionStack.splice(fileInStackIndex, 1);
+			if (fileInStackIndex !== -1)
+				prevFileSelectionStack.splice(fileInStackIndex, 1);
 
 			return [ ...prevFileSelectionStack ];
 		});

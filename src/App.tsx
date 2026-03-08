@@ -7,6 +7,7 @@ import useMutualVariables from "./hooks/useMutualVariables";
 import resume from "./assets/resume.html?raw";
 import useNonMobileVariables from "./hooks/useNonMobileVariables";
 import useMutualFunctions from "./hooks/useMutualFunctions";
+import useMobileVariables from "./hooks/useMobileVariables";
 
 export default function App() {
 	const [ width, setWidth ] = useState(window.innerWidth);
@@ -40,6 +41,12 @@ export default function App() {
 		option,
 		setOption
 	] = useNonMobileVariables(width, setWidth);
+	const [
+		isOpen,
+		setIsOpen,
+		selectedMenu,
+		setSelectedMenu
+	] = useMobileVariables();
 
 	function download() {
 		const blob = new Blob([resume], { type: "text/html;charset=utf-8" });
@@ -78,13 +85,23 @@ export default function App() {
 
 	return width <= MAX_MOBILE_WIDTH ?
 		<MobileLayout
+			lang={lang}
 			changeLang={changeLang}
 			theme={theme}
 			changeTheme={setTheme}
 			files={files}
 			selectedFile={files.find(f => f.name === fileSelectionStack.at(-1) as string) as File}
+			newFile={newFile}
+			changeFileContent={changeFileContent}
 			selectFile={selectFile}
 			closeFile={closeFile}
+			selectedMenu={selectedMenu}
+			changeSelectedMenu={setSelectedMenu}
+			download={download}
+			downloadFile={downloadFile}
+			remove={removeFile}
+			isOpen={isOpen}
+			switchIsOpen={() => setIsOpen(prev => !prev)}
 		/>
 		:
 		<NonMobileLayout

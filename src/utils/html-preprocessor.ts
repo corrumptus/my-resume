@@ -114,6 +114,7 @@ export default function htmlPreProcessor(html: string) {
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     walk(doc as any);
 
     // Importante: as chaves de loc.attrs podem vir em lowercase (ex.: viewBox vira viewbox)

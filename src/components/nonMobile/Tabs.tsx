@@ -73,7 +73,7 @@ export default function Tabs({
             <div className="tabBody">
                 <CodeTab
                     code={selectedFile.content}
-                    setCode={changeFileContent}
+                    changeFileContent={changeFileContent}
                 />
             </div>
         </div>

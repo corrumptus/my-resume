@@ -1,26 +1,6 @@
 import { useEffect } from "react";
 import type { AvailableLangs, AvailableOrientations, AvailableThemes } from "../../main";
-import themes from "../../utils/themes";
-
-function translateThemeName(lang: AvailableLangs, themeName: AvailableThemes) {
-    const translations: Record<AvailableLangs, Record<AvailableThemes, string>> = {
-        "pt-br": {
-            "default": "Padrão",
-            "light": "Claro",
-            "dark": "Escuro",
-            "monokai": "Monokai",
-            "dracula": "Drácula"
-        },
-        "en": {
-            "default": "Default",
-            "light": "Light",
-            "dark": "Dark",
-            "monokai": "Monokai",
-            "dracula": "Dracula"
-        }
-    };
-    return translations[lang][themeName];
-}
+import themes, { translateThemeName } from "../../utils/themes";
 
 export default function SettingsModal({
     lang,
@@ -73,23 +53,43 @@ export default function SettingsModal({
     >
         <div className="lang">
             <ul>
-                <li style={{ listStyleType: lang === "pt-br" ? "disclosure-closed" : "" }} onClick={() => changeLang("pt-br")}>Português</li>
-                <li style={{ listStyleType: lang === "en" ? "disclosure-closed" : "" }} onClick={() => changeLang("en")}>English</li>
+                <li
+                    style={{ listStyleType: lang === "pt-br" ? "disclosure-closed" : undefined }}
+                    onClick={() => changeLang("pt-br")}
+                >
+                    Português
+                </li>
+                <li
+                    style={{ listStyleType: lang === "en" ? "disclosure-closed" : undefined }}
+                    onClick={() => changeLang("en")}
+                >
+                    English
+                </li>
             </ul>
         </div>
         <div className="orientation">
             <ul>
-                <li style={{ listStyleType: orientation === "backwards" ? "disclosure-closed" : "" }} onClick={() => setNewOrientation("backwards")}>{lang === "pt-br" ? "Ao contrário" : "Backwards"}</li>
-                <li style={{ listStyleType: orientation === "forwards" ? "disclosure-closed" : "" }} onClick={() => setNewOrientation("forwards")}>{lang === "pt-br" ? "Normal" : "Forwards"}</li>
+                <li
+                    style={{ listStyleType: orientation === "backwards" ? "disclosure-closed" : undefined }}
+                    onClick={() => setNewOrientation("backwards")}
+                >
+                    {lang === "pt-br" ? "Ao contrário" : "Backwards"}
+                </li>
+                <li
+                    style={{ listStyleType: orientation === "forwards" ? "disclosure-closed" : undefined }}
+                    onClick={() => setNewOrientation("forwards")}
+                >
+                    {lang === "pt-br" ? "Normal" : "Forwards"}
+                </li>
             </ul>
         </div>
         <div className="theme">
             <ul>
-                {Object.keys(themes).map((themeName) => (
+                {Object.keys(themes).map(themeName => (
                     <li
-                        style={{ listStyleType: theme === themeName ? "disclosure-closed" : "" }}
                         key={themeName}
                         onClick={() => changeTheme(themeName as AvailableThemes)}
+                        style={{ listStyleType: theme === themeName ? "disclosure-closed" : undefined }}
                     >
                         {translateThemeName(lang, themeName as AvailableThemes)}
                     </li>

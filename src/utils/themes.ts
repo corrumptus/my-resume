@@ -1,4 +1,4 @@
-import type { AvailableThemes, Theme } from "../main";
+import type { AvailableLangs, AvailableThemes, Theme } from "../main";
 
 const themes: Record<AvailableThemes, Theme> = {
     "default": {
@@ -112,5 +112,25 @@ const themes: Record<AvailableThemes, Theme> = {
         comment: "#6272a4"
     }
 };
+
+export function translateThemeName(lang: AvailableLangs, themeName: AvailableThemes) {
+    const translations: Record<AvailableLangs, Record<AvailableThemes, string>> = {
+        "pt-br": {
+            "default": "Padrão",
+            "light": "Claro",
+            "dark": "Escuro",
+            "monokai": "Monokai",
+            "dracula": "Drácula"
+        },
+        "en": {
+            "default": "Default",
+            "light": "Light",
+            "dark": "Dark",
+            "monokai": "Monokai",
+            "dracula": "Dracula"
+        }
+    };
+    return translations[lang][themeName];
+}
 
 export default themes;

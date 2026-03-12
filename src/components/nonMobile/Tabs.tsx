@@ -1,6 +1,7 @@
-import CodeTab from "./CodeTab";
-import themes from "../../utils/themes";
+import { useEffect, useRef, useState } from "react";
+import MonacoEditor from "react-monaco-editor";
 import type { AvailableOrientations, AvailableThemes, File } from "../../main";
+import themes from "../../utils/themes";
 
 export default function Tabs({
     orientation,
@@ -19,6 +20,19 @@ export default function Tabs({
     closeFile: (fileName: string) => void,
     theme: AvailableThemes
 }) {
+    const [ size, setSize ] = useState({ width: 0, height: 0 });
+    const tabBody = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const ro = new ResizeObserver(() => {
+            setSize({ width: tabBody.current?.clientWidth || 0, height: tabBody.current?.clientHeight || 0 });
+        });
+
+        ro.observe(tabBody.current!);
+
+        return () => ro.disconnect();
+    }, [size.width, size.height]);
+
     return <main style={{ flexDirection: orientation === "backwards" ? "row" : "row-reverse" }}>
         <div id="browser">
             <header>
@@ -70,10 +84,19 @@ export default function Tabs({
                     </button>
                 )}
             </header>
-            <div className="tabBody">
-                <CodeTab
-                    code={selectedFile.content}
-                    changeFileContent={changeFileContent}
+            <div className="tabBody" ref={tabBody}>
+                <MonacoEditor
+                    width={size.width}
+                    height={size.height}
+                    value={selectedFile.content}
+                    onChange={changeFileContent}
+                    language="html"
+                    theme={theme}
+                    options={{
+                        minimap: {
+                            enabled: false
+                        }
+                    }}
                 />
             </div>
         </div>

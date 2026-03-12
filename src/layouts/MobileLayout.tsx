@@ -52,7 +52,8 @@ export default function MobileLayout({
         />
         <Tabs
             selectedFile={selectedFile}
-            changeFileContent={changeFileContent}            
+            changeFileContent={changeFileContent}
+            theme={theme}
         />
         <SideBar
             lang={lang}

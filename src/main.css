@@ -62,45 +62,9 @@ body.mobile {
 .mobile main {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-}
-
-.mobile main #files {
-    height: 50%;
     display: flex;
     flex-direction: column;
-    background-color: var(--secondaryBgColor);
-}
-
-.mobile main #files .code {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    font-family: sans-serif;
-}
-
-.mobile pre, textarea {
-    height: calc(100% - 2em);
-    padding: 1em 8em 1em 1em;
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.mobile pre {
-    overflow: auto;
-    pointer-events: none;
-}
-
-.mobile textarea {
-    inset: 0;
-    border: unset;
-    background: transparent;
-    color: transparent;
-    caret-color: var(--caretColor);
-    outline: none;
-    position: absolute;
-    resize: none;
+    overflow: hidden;
 }
 
 .mobile main #browser {
@@ -519,38 +483,6 @@ body.mobile {
 .nonMobile main #files .tabBody {
     height: 100%;
     overflow: auto;
-}
-
-.nonMobile main #files .tabBody .code {
-    width: fit-content;
-    min-width: 100%;
-    height: 100%;
-    position: relative;
-    font-family: sans-serif;
-}
-
-.nonMobile pre, textarea {
-    padding: 1em 8em 0px 1em;
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.nonMobile pre {
-    width: fit-content;
-    pointer-events: none;
-}
-
-.nonMobile textarea {
-    height: calc(100% - 1em);
-    inset: 0;
-    border: unset;
-    background: transparent;
-    color: transparent;
-    caret-color: var(--caretColor);
-    outline: none;
-    position: absolute;
-    resize: none;
 }
 
 .nonMobile .settings {

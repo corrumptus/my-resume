@@ -1,6 +1,8 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./main.css";
+import "./monaco-setup";
+import "./utils/setup";
 
 export type AvailableLangs = "pt-br" | "en";
 
@@ -38,5 +40,7 @@ export type Theme = {
 export type AvailableThemes = "default" | "light" | "dark" | "monokai" | "dracula";
 
 export const MAX_MOBILE_WIDTH = 800;
+
+
 
 createRoot(document.body).render(<App />);

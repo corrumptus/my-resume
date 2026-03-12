@@ -1,6 +1,6 @@
 import { useEffect, useState, type KeyboardEvent } from "react";
-import type { AvailableLangs, AvailableThemes, File } from "../../main";
 import themes from "../../utils/themes";
+import type { AvailableLangs, AvailableThemes, File } from "../../main";
 
 export default function FilesMenu({
     lang,

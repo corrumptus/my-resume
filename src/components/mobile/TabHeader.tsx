@@ -1,5 +1,5 @@
-import type { AvailableThemes, File } from "../../main";
 import themes from "../../utils/themes";
+import type { AvailableThemes, File } from "../../main";
 
 export default function TabHeader({
     openedFiles,

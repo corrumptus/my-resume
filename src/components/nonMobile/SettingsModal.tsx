@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import type { AvailableLangs, AvailableOrientations, AvailableThemes } from "../../main";
 import themes, { translateThemeName } from "../../utils/themes";
+import type { AvailableLangs, AvailableOrientations, AvailableThemes } from "../../main";
 
 export default function SettingsModal({
     lang,

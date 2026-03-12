@@ -1,6 +1,6 @@
+import themes from "../../utils/themes";
 import type { MouseEvent } from "react";
 import type { AvailableLangs, AvailableOrientations, AvailableThemes } from "../../main";
-import themes from "../../utils/themes";
 
 export default function Buttons({
     selectedSideBar,

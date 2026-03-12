@@ -1,6 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import MonacoEditor from "react-monaco-editor";
 import type { AvailableThemes, File } from "../../main";
-import { useEffect, useRef, useState } from "react";
 
 export default function TabVisualizer({
     selectedFile,

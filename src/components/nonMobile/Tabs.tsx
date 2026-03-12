@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import MonacoEditor from "react-monaco-editor";
-import type { AvailableOrientations, AvailableThemes, File } from "../../main";
 import themes from "../../utils/themes";
+import type { AvailableOrientations, AvailableThemes, File } from "../../main";
 
 export default function Tabs({
     orientation,

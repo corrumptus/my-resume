@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import "./main.css";
 import "./monaco-setup";
 import "./utils/setup";
+import "./main.css";
 
 export type AvailableLangs = "pt-br" | "en";
 

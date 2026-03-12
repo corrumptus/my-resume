@@ -1,6 +1,6 @@
-import type { AvailableLangs, AvailableThemes, File } from "../../main";
 import FilesMenu from "./FilesMenu";
 import SettingsMenu from "./SettingsMenu";
+import type { AvailableLangs, AvailableThemes, File } from "../../main";
 
 export default function SideBar({
     lang,

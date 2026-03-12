@@ -1,5 +1,5 @@
-import type { AvailableLangs, AvailableThemes } from "../../main";
 import themes, { translateThemeName } from "../../utils/themes";
+import type { AvailableLangs, AvailableThemes } from "../../main";
 
 export default function SettingsMenu({
     lang,

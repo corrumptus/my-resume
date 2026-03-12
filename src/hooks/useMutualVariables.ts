@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { AvailableLangs, AvailableThemes, File } from "../main";
 import themes from "../utils/themes";
 import resume from "../assets/resume.html?raw";
+import type { AvailableLangs, AvailableThemes, File } from "../main";
 
 export default function useMutualVariables() {
     const [ lang, setLang ] = useState<AvailableLangs>("pt-br");

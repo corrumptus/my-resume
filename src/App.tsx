@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import NonMobileLayout from "./layouts/NonMobileLayout";
 import MobileLayout from "./layouts/MobileLayout";
-import { MAX_MOBILE_WIDTH } from "./main";
-import type { File } from "./main";
+import { MAX_MOBILE_WIDTH, type File } from "./main";
 import useMutualVariables from "./hooks/useMutualVariables";
-import resume from "./assets/resume.html?raw";
 import useNonMobileVariables from "./hooks/useNonMobileVariables";
 import useMutualFunctions from "./hooks/useMutualFunctions";
 import useMobileVariables from "./hooks/useMobileVariables";
+import resume from "./assets/resume.html?raw";
 
 export default function App() {
 	const [ width, setWidth ] = useState(window.innerWidth);

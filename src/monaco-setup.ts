@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as monaco from "monaco-editor";
 
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
@@ -24,3 +23,25 @@ self.MonacoEnvironment = {
     return new editorWorker();
   }
 };
+
+(async () => {
+  const htmlEntry = monaco.languages.getLanguages().find(l => l.id === 'html');
+
+  // @ts-ignore
+  if (!htmlEntry?.loader) throw new Error('HTML loader não encontrado');
+
+  // @ts-ignore
+  const mod = await htmlEntry.loader();
+  const htmlLang = mod.language;
+
+  await new Promise(res => setTimeout(res, 100));
+
+  htmlLang.tokenizer.doctype[1] = [ />/, "delimiter", "@pop" ];
+  htmlLang.tokenizer.doctype.unshift(
+    [ /doctype/, "metatag" ]
+  );
+
+  htmlLang.tokenizer.root[0] = [ /(<!)(?=doctype\b)/i, "delimiter", "@doctype" ];
+
+  monaco.languages.setMonarchTokensProvider('html', htmlLang);
+})();

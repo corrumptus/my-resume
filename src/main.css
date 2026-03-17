@@ -84,6 +84,7 @@ body.mobile {
     border-radius: .75em 0 0 .75em;
     display: grid;
     grid-template-areas: 'oc bs' 'oc m';
+    grid-template-columns: 33px 237px;
     grid-template-rows: min-content auto;
     row-gap: 1em;
     position: absolute;
@@ -114,8 +115,10 @@ body.mobile {
 }
 
 .mobile nav #navButtons {
+    width: fit-content;
     padding: .5em;
     border-radius: 1.6em;
+    margin: auto;
     display: flex;
     gap: .8em;
     position: relative;
@@ -141,7 +144,7 @@ body.mobile {
 }
 
 .mobile nav #navButtons.settingsSelected::before {
-    left: calc(.5em + 65px + .8em + 65px + .8em);
+    right: .5em
 }
 
 .mobile nav #navButtons button {

@@ -86,7 +86,12 @@ export default function NonMobileLayout({
             selectedSideBar={selectedSideBar}
             changeSelectedSideBar={changeSelectedSideBar}
             download={download}
-            openSettings={(e, pos) => { modal !== "settings" && e.stopPropagation(); changeSettingsPosition(pos); }}
+            openSettings={(e, pos) => {
+                if (modal !== "settings")
+                    e.stopPropagation();
+
+                changeSettingsPosition(pos);
+            }}
             orientation={orientation}
             lang={lang}
             theme={theme}

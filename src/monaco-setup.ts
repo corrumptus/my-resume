@@ -27,10 +27,10 @@ self.MonacoEnvironment = {
 (async () => {
   const htmlEntry = monaco.languages.getLanguages().find(l => l.id === 'html');
 
-  // @ts-ignore
+  //@ts-expect-error monaco.languages.ILanguageExtensionPoint interface doesnt have the loader attribute
   if (!htmlEntry?.loader) throw new Error('HTML loader não encontrado');
 
-  // @ts-ignore
+  // @ts-expect-error monaco.languages.ILanguageExtensionPoint interface doesnt have the loader attribute
   const mod = await htmlEntry.loader();
   const htmlLang = mod.language;
 

@@ -6,8 +6,6 @@ import useMutualVariables from "./hooks/useMutualVariables";
 import useNonMobileVariables from "./hooks/useNonMobileVariables";
 import useMutualFunctions from "./hooks/useMutualFunctions";
 import useMobileVariables from "./hooks/useMobileVariables";
-import HTMLresume from "./assets/resume.html?raw";
-// import resume from "./assets/resume.pdf?raw";
 
 export default function App() {
 	const [ width, setWidth ] = useState(window.innerWidth);
@@ -54,22 +52,18 @@ export default function App() {
 	}, [width]);
 
 	function download() {
-		const blob = new Blob([ HTMLresume ], { type: "text/html;charset=utf-8" });
-    	const url = URL.createObjectURL(blob);
-
 		const link = document.createElement("a");
-		link.href = url;
+
+		link.href = "/Lucas_Lazarini_Curriculo_Profissional.pdf";
 		link.download = lang === "pt-BR" ?
-			"currículo - Lucas Lazarini.pdf"
+			"Lucas_Lazarini_Curriculo_Profissional.pdf"
 			:
-			"HTMLresume - Lucas Lazarini.pdf";
+			"Lucas_Lazarini_Professional_resume.pdf";
 		link.style.visibility = "hidden";
 
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
-
-		URL.revokeObjectURL(url);
 	}
 
 	function downloadFile(file: File) {

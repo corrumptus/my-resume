@@ -4,21 +4,21 @@ import resume from "../assets/resume.html?raw";
 import type { AvailableLangs, AvailableThemes, File } from "../main";
 
 export default function useMutualVariables() {
-    const [ lang, setLang ] = useState<AvailableLangs>("pt-br");
+    const [ lang, setLang ] = useState<AvailableLangs>("pt-BR");
     const [ theme, setTheme ] = useState<AvailableThemes>("default");
     const [ files, setFiles ] = useState<File[]>([
         {
-            name: "currículo.html",
+            name: lang === "pt-BR" ? "currículo.html" : "resume.html",
             content: resume,
             isOpen: true
         }
     ]);
-    const [ fileSelectionStack, setFileSelectionStack ] = useState<string[]>(["currículo.html"]);
+    const [ fileSelectionStack, setFileSelectionStack ] = useState<string[]>([files[0].name]);
 
     useEffect(() => {
 	    document.documentElement.lang = lang;
 
-        if (lang === "pt-br")
+        if (lang === "pt-BR")
             document.querySelector("title")!.innerText = "Currículo";
         else
             document.querySelector("title")!.innerText = "Resume";

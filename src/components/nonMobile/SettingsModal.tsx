@@ -54,14 +54,14 @@ export default function SettingsModal({
         <div className="lang">
             <ul>
                 <li
-                    style={{ listStyleType: lang === "pt-br" ? "disclosure-closed" : undefined }}
-                    onClick={() => changeLang("pt-br")}
+                    style={{ listStyleType: lang === "pt-BR" ? "disclosure-closed" : undefined }}
+                    onClick={() => changeLang("pt-BR")}
                 >
                     Português
                 </li>
                 <li
-                    style={{ listStyleType: lang === "en" ? "disclosure-closed" : undefined }}
-                    onClick={() => changeLang("en")}
+                    style={{ listStyleType: lang === "en-US" ? "disclosure-closed" : undefined }}
+                    onClick={() => changeLang("en-US")}
                 >
                     English
                 </li>
@@ -73,13 +73,13 @@ export default function SettingsModal({
                     style={{ listStyleType: orientation === "backwards" ? "disclosure-closed" : undefined }}
                     onClick={() => setNewOrientation("backwards")}
                 >
-                    {lang === "pt-br" ? "Ao contrário" : "Backwards"}
+                    {lang === "pt-BR" ? "Ao contrário" : "Backwards"}
                 </li>
                 <li
                     style={{ listStyleType: orientation === "forwards" ? "disclosure-closed" : undefined }}
                     onClick={() => setNewOrientation("forwards")}
                 >
-                    {lang === "pt-br" ? "Normal" : "Forwards"}
+                    {lang === "pt-BR" ? "Normal" : "Forwards"}
                 </li>
             </ul>
         </div>

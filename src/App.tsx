@@ -59,7 +59,7 @@ export default function App() {
 
 		const link = document.createElement("a");
 		link.href = url;
-		link.download = lang === "pt-br" ?
+		link.download = lang === "pt-BR" ?
 			"currículo - Lucas Lazarini.pdf"
 			:
 			"HTMLresume - Lucas Lazarini.pdf";

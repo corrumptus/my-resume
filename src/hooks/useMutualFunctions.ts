@@ -15,13 +15,13 @@ export default function useMutualFunctions(
         setLang(newLang);
 
         setFiles(prevFiles => {
-            prevFiles[0].name = newLang === "pt-br" ? "currículo.html" : "resume.html";
+            prevFiles[0].name = newLang === "pt-BR" ? "currículo.html" : "resume.html";
             return [ ...prevFiles ];
         });
 
 		setFileSelectionStack(prevFileSelectionStack => {
-			const index = prevFileSelectionStack.indexOf(lang === "pt-br" ? "currículo.html" : "resume.html");
-			prevFileSelectionStack[index] = newLang === "pt-br" ? "currículo.html" : "resume.html";
+			const index = prevFileSelectionStack.indexOf(lang === "pt-BR" ? "currículo.html" : "resume.html");
+			prevFileSelectionStack[index] = newLang === "pt-BR" ? "currículo.html" : "resume.html";
 			return [ ...prevFileSelectionStack ];
 		});
     }

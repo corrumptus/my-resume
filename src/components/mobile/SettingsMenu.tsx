@@ -16,19 +16,19 @@ export default function SettingsMenu({
         <div className="lang">
             <ul>
                 <li
-                    onClick={() => changeLang("pt-br")}
+                    onClick={() => changeLang("pt-BR")}
                     style={{
-                        listStyleType: lang === "pt-br" ? "disclosure-closed" : undefined,
-                        backgroundColor: lang === "pt-br" ? "var(--closeTabButtonBgColor)" : undefined
+                        listStyleType: lang === "pt-BR" ? "disclosure-closed" : undefined,
+                        backgroundColor: lang === "pt-BR" ? "var(--closeTabButtonBgColor)" : undefined
                     }}
                 >
                     Português
                 </li>
                 <li
-                    onClick={() => changeLang("en")}
+                    onClick={() => changeLang("en-US")}
                     style={{
-                        listStyleType: lang === "en" ? "disclosure-closed" : undefined,
-                        backgroundColor: lang === "en" ? "var(--closeTabButtonBgColor)" : undefined
+                        listStyleType: lang === "en-US" ? "disclosure-closed" : undefined,
+                        backgroundColor: lang === "en-US" ? "var(--closeTabButtonBgColor)" : undefined
                     }}
                 >
                     English

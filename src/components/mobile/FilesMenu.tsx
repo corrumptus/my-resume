@@ -71,7 +71,7 @@ export default function FilesMenu({
                     />
                 </span>
                 <span>
-                    {lang === "pt-br" ? "Novo arquivo" : "New file"}
+                    {lang === "pt-BR" ? "Novo arquivo" : "New file"}
                 </span>
             </button>
             :
@@ -96,7 +96,7 @@ export default function FilesMenu({
                 />
             </span>
             <span>
-                {lang === "pt-br" ? "Baixar currículo" : "Download resume"}
+                {lang === "pt-BR" ? "Baixar currículo" : "Download resume"}
             </span>
         </button>
         <button onClick={() => downloadFile(selectedFile)} id="downloadFileButton">
@@ -107,7 +107,7 @@ export default function FilesMenu({
                 />
             </span>
             <span>
-                {lang === "pt-br" ? "Baixar arquivo selecionado" : "Download selected file"}
+                {lang === "pt-BR" ? "Baixar arquivo selecionado" : "Download selected file"}
             </span>
         </button>
         <ul>

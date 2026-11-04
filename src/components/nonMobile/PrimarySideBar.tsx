@@ -102,7 +102,7 @@ export default function PrimarySideBar({
             <span>Lucas Lazarini</span>
             <button
                 onClick={handleNewFileClick}
-                title={lang === "pt-br" ? "Criar novo arquivo" : "create new file"}
+                title={lang === "pt-BR" ? "Criar novo arquivo" : "create new file"}
             >
                 <img
                     src="https://raw.githubusercontent.com/microsoft/vscode-codicons/645a51d1334b455269642296866e9a30badde0c3/src/icons/new-file.svg"
@@ -141,8 +141,8 @@ export default function PrimarySideBar({
                 pointerEvents: modal === "options" ? "auto" : "none"
             }}
         >
-            <button onClick={() => download(option!.file)}>{lang === "pt-br" ? "Baixar arquivo" : "Download file"}</button>
-            <button onClick={() => remove(option!.file.name)}>{lang === "pt-br" ? "Excluir arquivo" : "Delete file"}</button>
+            <button onClick={() => download(option!.file)}>{lang === "pt-BR" ? "Baixar arquivo" : "Download file"}</button>
+            <button onClick={() => remove(option!.file.name)}>{lang === "pt-BR" ? "Excluir arquivo" : "Delete file"}</button>
         </div>
     </aside>;
 }

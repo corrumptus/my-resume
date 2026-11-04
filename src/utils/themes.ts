@@ -115,14 +115,14 @@ const themes: Record<AvailableThemes, Theme> = {
 
 export function translateThemeName(lang: AvailableLangs, themeName: AvailableThemes) {
     const translations: Record<AvailableLangs, Record<AvailableThemes, string>> = {
-        "pt-br": {
+        "pt-BR": {
             "default": "Padrão",
             "light": "Claro",
             "dark": "Escuro",
             "monokai": "Monokai",
             "dracula": "Drácula"
         },
-        "en": {
+        "en-US": {
             "default": "Default",
             "light": "Light",
             "dark": "Dark",

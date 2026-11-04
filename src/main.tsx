@@ -4,7 +4,7 @@ import "./monaco-setup";
 import "./utils/setup";
 import "./main.css";
 
-export type AvailableLangs = "pt-br" | "en";
+export type AvailableLangs = "pt-BR" | "en-US";
 
 export type AvailableOrientations = "backwards" | "forwards";
 

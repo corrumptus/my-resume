@@ -24,7 +24,7 @@ export default function Buttons({
     return <nav>
         <button
             onClick={() => changeSelectedSideBar("files")}
-            title={lang === "pt-br" ? "Arquivos" : "Files"}
+            title={lang === "pt-BR" ? "Arquivos" : "Files"}
             style={selectedSideBar === "files" ? {
                 [orientation === "backwards" ? "borderRightColor" : "borderLeftColor"]: themes[theme].selectedThing
             } : undefined}
@@ -33,7 +33,7 @@ export default function Buttons({
         </button>
         {/* <button
             onClick={() => changeSelectedSideBar("chat")}
-            title={lang === "pt-br" ? "Converse comigo" : "Chat with me"}
+            title={lang === "pt-BR" ? "Converse comigo" : "Chat with me"}
             style={selectedSideBar === "chat" ? {
                 [orientation === "backwards" ? "borderRightColor" : "borderLeftColor"]: themes[theme].selectedThing
             } : undefined}
@@ -42,13 +42,13 @@ export default function Buttons({
         </button> */}
         <button
             onClick={download}
-            title={lang === "pt-br" ? "Baixar currículo" : "Download resume"}
+            title={lang === "pt-BR" ? "Baixar currículo" : "Download resume"}
         >
             <img src="https://raw.githubusercontent.com/microsoft/vscode-codicons/542ec2a3375b21d42d4b75a995c4feb896aad305/src/icons/download.svg" alt="a arrow pointing to the bottom" />
         </button>
         <button
             onClick={e => { changeModal("settings"); openSettings(e, { x: e.clientX, y: e.clientY }); }}
-            title={lang === "pt-br" ? "Configurações" : "Settings"}
+            title={lang === "pt-BR" ? "Configurações" : "Settings"}
         >
             <img src="https://raw.githubusercontent.com/microsoft/vscode-codicons/542ec2a3375b21d42d4b75a995c4feb896aad305/src/icons/settings-gear.svg" alt="a gear" />
         </button>
